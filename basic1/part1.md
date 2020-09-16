@@ -104,7 +104,7 @@ echo "User dang nhap:"
 whoami
 ```
 
-thục thi: 
+Thực thi: 
 ```
 # ./file
 Thu muc hien tai la:
@@ -121,4 +121,167 @@ Có 2 loại biến có thể được sử dụng trong lệnh bash:
 * User Variable 
 
 ### Environment Variable
-Đôi khi các lệnh shell cần hoạt động với một số dữ liệu hệ thống. Ví dujL đây là cách hiển thị thư mục chính của người dùng:
+Đôi khi các lệnh shell cần hoạt động với một số dữ liệu hệ thống. Ví dụ đây là cách hiển thị thư mục chính của người dùng:
+```
+#!/bin/bash
+# This is a comment
+echo "Trang chủ cho người dùng hiện tại: $HOME"
+```
+
+Kết quả:
+```
+[huydv@srv1 ~]$ ./file 
+Trang chủ cho người dùng hiện tại: /home/huydv
+```
+
+Lưu ý rằng `$HOME` là biến hệ thống nên có thể sử dụng bên trong dấu ngoặc kép.
+
+**Vd1**:
+
+```
+#!/bin/bash
+# This is a comment
+echo "tôi có: $1"
+```
+
+kết quả:
+```
+[huydv@srv1 ~]$ ./file 
+tôi có: 
+```
+
+**Vd2**:
+```
+#!/bin/bash
+# This is a comment
+echo "tôi có: $100"
+```
+Kết quả:
+
+```
+[huydv@srv1 ~]$ ./file 
+tôi có: 00
+```
+Hệ thống phát hiện ký hiệu `$` trong chuỗi và nó cố gắng tham chiếu đến  một biến không xác định.
+
+Muốn hiển thị được dấu `$` thêm dấu `\` trước `$`:
+
+
+```
+#!/bin/bash
+# This is a comment
+echo "tôi có: \$100"
+```
+
+Kết quả:
+```
+[huydv@srv1 ~]$ ./file 
+tôi có: $100
+```
+
+## Biến người dùng User Variable
+Ngoài các biến môi trường, tệp lệnh bash cho phép bạn thiết lập và sử dụng các biến của riêng mình trong tệp lệnh. Các biến này giữ giá trị của chúng cho đến khi tập lệnh kết thúc thực thi.
+*vd1*:
+```
+#!/bin/bash
+# Test user variables
+
+# Khai báo biến
+tuoi=20
+ten="huy"
+
+#Thực thi
+echo "tôi tên là: $ten và năm nay tôi: $tuoi"
+```
+
+Kết quả:
+```
+[huydv@srv1 ~]$ ./file 
+tôi tên là: huy và năm nay tôi: 20
+```
+
+**vd2**:
+```
+#!/bin/bash
+# Test user variables
+
+# Khai báo biến
+tuoi="Hai mươi"
+ten="Đường Huy"
+
+#Thực thi
+echo "tôi tên là: $ten và năm nay tôi: $tuoi"
+```
+
+Kết quả:
+```
+[huydv@srv1 ~]$ ./file 
+./file: line 5: mươi: command not found
+tôi tên là: Đường Huy và năm nay tôi: 
+[huydv@srv1 ~]$ ./file 
+tôi tên là: Đường Huy và năm nay tôi: Hai mươi
+```
+
+Lưu ý chuỗi ký tự có dấu cách phải đặt trong nháy kép `"Chuỗi ký tự"`
+
+## Command substitution - Thay thế lệnh
+
+Một trong những tính năng hữu ích nhất của bash Script là khả năng trích xuất thông tin từ đầu ra của tệp lệnh và gắn cho nó các biến, cho phép thông tin được sử dụng trong bất kỳ đâu của Script
+
+Được thực hiện theo hai cách:
+
+* với `""`
+* với cấu trúc `$()`
+
+Sử dụng cách tiếp cận đầu tiên, hãy cẩn thận không sử dụng một trích dẫn duy nhất thay vì biểu tưởng nền(**Lấy lệnh gắn làm biến**). Lệnh phải đặt trong biểu tượng như vậy:
+
+**Vd1**:
+
+```
+#!/bin/bash
+# Test backtick  variables
+
+# Khai báo biến
+mydir=`pwd`
+
+#Thực thi
+echo $mydir
+```
+
+Hoặc
+
+```
+#!/bin/bash
+# Test construction variables
+
+# Khai báo biến
+mydir=$(pwd)
+
+#Thực thi
+echo $mydir
+```
+Kết quả:
+```
+[huydv@srv1 ~]$ ./file 
+/home/huydv
+```
+vd2:
+```
+#!/bin/bash
+# Test Command substitution
+
+# Khai báo biến
+new=$(echo "tạo file và xem" > new.txt; cat new.txt)
+
+#Thực thi
+echo $new
+```
+
+
+Kết quả:
+
+```
+[huydv@srv1 ~]$ ./file 
+tạo file và xem
+```
+
