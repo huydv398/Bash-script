@@ -285,3 +285,189 @@ Kết quả:
 tạo file và xem
 ```
 
+## Các hoạt động toán học
+Để thực hiện các phép toán trong tệp Script, bạn có thể sử dụng  cấu trúc có dạng `$((a+b))`:
+```
+#!/bin/bash
+# Mathematical operations
+
+var1=$(( 10 + 5 ))
+echo $var1
+var2=$(( $var1 * 2 ))
+echo $var2
+```
+
+kết quả
+
+```
+[huydv@srv1 ~]$ ./file 
+15
+30
+```
+## Cấu trúc if- then
+Một số tình huống yêu cầu kiểm soát luồng thực thi lệnh. Ví dụ: nếu một số giá trị lớn hơn 5, bạn thực hiện một hành động, nếu không đủ điều kiện thì thì thực hiện hành động khác.
+```
+if pwd
+then
+echo "Thư mục của tôi"
+fi
+```
+Trong trường hợp này, nếu thực hiện được lệnh `pwd` thành công, thì `echo` văn bản bên dưới:
+```
+[huydv@srv1 ~]$ ./file 
+/home/huydv
+Thư mục của tôi
+```
+
+ví dụ, tìm một người dùng trong hệ thống thì phải tìm trong file `/etc/passwd`. Ở đây tôi sử dụng câu lệnh `grep` để tìm user trong file `/etc/passwd`. Nếu tìm thấytuser thì mới in ra:
+
+```
+#!/bin/bash
+# If-then control construct
+user=huydv 
+if grep $user /etc/passwd
+then
+echo "The user $user Tồn tại"
+fi
+```
+
+Kết quả
+```
+[huydv@srv1 ~]$ ./file 
+huydv:x:1000:1000::/home/huydv:/bin/bash
+The user huydv Tồn tại
+```
+
+Trong ví dụ này, nếu người dùng được tìm thấy, tập lệnh sẽ hiển thị người dùng. Nếu không tìm thấy người dùng thì tập lệnh sẽ không in ra gì.
+## If-then-else control construct - Cấu trúc if-then-else 
+Để chương trình có thể báo cáo cả kết quả thành công và không thành công. sử dụng `if-then-else`:
+```
+# Điều kiện
+if [Điều kiện]
+# Nếu đủ điều kiện thực hiện command then
+then
+[Commands]
+
+# Không đủ điều kiện thực hiện lệnh else
+else
+[Commands]
+fi
+```
+
+Nêu lệnh đầu trả về 0 có nghĩa được thực thi thành công, điều kiện sẽ true và việc thực thi sẽ không đi xuống nhánh `else`. Ngược lại, nếu trả về khác không, nghĩa là không thành công hoặc kết quả sai, thì các lệnh sau nó sẽ được thực thi `else`
+```
+user=usernew11
+if grep $user /etc/passwd
+then
+echo "The user $user tồn tại"
+else
+echo "The user $user không tồn tại"
+fi
+```
+kết quả:
+```
+[huydv@srv1 ~]$ ./file 
+The user usernew11 không tồn tại
+```
+
+Số điều kiện tăng lên:
+```
+if <condition-1>
+then
+<some-commands>
+elif <condition-2>
+then
+<some-other-commands>
+fi
+```
+
+vidu
+```
+#!/bin/bash
+# If-then control construct
+
+user=huydv
+
+if grep $user /etc/passwd
+then
+echo "The user $user tồn tại"
+elif ls /home
+then
+echo "Không có user bạn cần tìm và có user trên tồn tại trong /home"
+fi
+```
+
+Kết quả
+```
+[huydv@srv1 ~]$ ./file 
+huydv:x:1000:1000::/home/huydv:/bin/bash
+The user huydv tồn tại
+```
+Vidu2:
+```
+#!/bin/bash
+# If-then control construct
+
+user=huydv1
+
+if grep $user /etc/passwd
+then
+echo "The user $user tồn tại"
+elif ls /home
+then
+echo "Không có user bạn cần tìm và có user trên tồn tại trong /home"
+fi
+```
+kết quả
+```
+[huydv@srv1 ~]$ ./file 
+huydv
+Không có user bạn cần tìm và có user trên tồn tại trong /home
+```
+
+## So sánh số
+
+num1 -eq num2 Trả về true nếu num1 bằng num2
+num1 -ge num2 Trả về true nếu num1 lớn hơn hoặc = num2
+num1 -gt num2 Trả về true nếu num1 lớn hơn num2
+num1 -le num2 Trả về true nếu num1 nhỏ hơn hoặc bằng num2
+num1 -lt num2 Trả về true nếu num1 nhỏ hơn num2
+num1 -ne num2 Trả về true nếu num1 không bằng num2
+
+Các giá trị số có thể được so sánh trong các tập lệnh. Dưới đây là danh sách tập lệnh
+|command|giá trị trả về true|
+|-|-|
+|-eq|=|
+|-ge|>=|
+|-gt|>|
+|-le|<=|
+|-lt|<|
+|-ne|!=|
+
+ví dụ
+```
+#!/bin/bash
+
+# đặt giá trị cho biến
+val1=4
+
+# nếu biến >5 
+if [ $val1 -gt 5 ]
+
+then
+echo "giá trị $val1 lớn hơn 5"
+else
+echo "giá trị $val1 không lơn hơn 5"
+fi
+```
+
+## So sánh chuỗi
+Bạn cũng có thể so sánh cách giá trị trong chuỗi trong tệp lệnh. Các toán tử so sánh trong khá đơn giản, nhưng các phép toán so sánh chuỗi có một số đặc biệt nhất định mà chúng ta sẽ đề cập bên dưới. đây là danh sách:
+|command|Giá trị khi true|
+|-|-|
+|str1 = str2|Các giá trị chuỗi bằng nhau|
+|str1 != str2|Các giá trị chuỗi không giống nhau|
+|str1 < str2|Chuỗi str1 ít hơn str2|
+|str1 > str2|Chuỗi str1 nhiều hơn str2|
+|-n str1|Độ dài chuỗi lớn hơn 0|
+|-z str1|Đọ dài chuỗi bằng 0|
