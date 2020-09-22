@@ -428,10 +428,15 @@ Không có user bạn cần tìm và có user trên tồn tại trong /home
 ## So sánh số
 
 num1 -eq num2 Trả về true nếu num1 bằng num2
+
 num1 -ge num2 Trả về true nếu num1 lớn hơn hoặc = num2
+
 num1 -gt num2 Trả về true nếu num1 lớn hơn num2
+
 num1 -le num2 Trả về true nếu num1 nhỏ hơn hoặc bằng num2
+
 num1 -lt num2 Trả về true nếu num1 nhỏ hơn num2
+
 num1 -ne num2 Trả về true nếu num1 không bằng num2
 
 Các giá trị số có thể được so sánh trong các tập lệnh. Dưới đây là danh sách tập lệnh
@@ -471,3 +476,20 @@ Bạn cũng có thể so sánh cách giá trị trong chuỗi trong tệp lệnh
 |str1 > str2|Chuỗi str1 nhiều hơn str2|
 |-n str1|Độ dài chuỗi lớn hơn 0|
 |-z str1|Đọ dài chuỗi bằng 0|
+
+vd1:
+
+```
+#!/bin/bash
+user="huydv"
+if [ $user = $USER ]
+then
+echo "$user là người dùng đăng nhập hiện tại"
+fi
+```
+
+kq:
+```
+[huydv@srv1 ~]$ ./file 
+huydv là người dùng đăng nhập hiện tại
+```
