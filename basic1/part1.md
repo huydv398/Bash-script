@@ -493,3 +493,135 @@ kq:
 [huydv@srv1 ~]$ ./file 
 huydv là người dùng đăng nhập hiện tại
 ```
+
+Đây là một tính năng đáng đề cập về so sanh chuỗi. Cụ thể, các toán tử ">" và "<" phải được thoát bằng dấu gạch chéo ngược \, nếu không, tập lệnh sẽ không hoạt động chính xắc, mặc dù không có thông báo lỗi nào xuất hiện. Tập lệnh diễn giải dấu ">" như một lệnh chuyển hướng đầu ra.
+
+Đây là cách làm việc với các toán tử này trông giống như sau:
+
+```
+#!/bin/bash
+val1=text
+val2="another text"
+if [ $val1 \> $val2 ]
+then
+echo "$val1 is greater than $val2"
+else
+echo "$val1 is less than $val2"
+fi
+```
+
+kết quả:
+```
+./file: line 4: [: too many arguments
+texsdfsdfdfsdfsd is less than another text
+```
+
+Để loại bỏ cảnh báo này hãy đặt $val2 trong ngoặc kép
+
+```
+#!/bin/bash
+val1=text
+val2="another text"
+if [ $val1 \> "$val2" ]
+then
+echo "$val1 is greater than $val2"
+else
+echo "$val1 is less than $val2"
+fi
+```
+Một đặt điểm khác của toán tử "> và <" là cách chúng hoạt động với các ký tự viết hoa và viết thường. Để hiểu tính năng này, chuẩn bị một tệp văn bản như sau:
+
+`vi myfile`
+
+thêm vào văn bản:
+
+```
+abc
+1
+Abe
+Cde
+```
+
+thực hiện trong terminal:
+
+`sort myfile`
+
+Kết quả:
+
+```
+1
+abc
+Abe
+Cde
+```
+
+Lệnh `sort`, theo mặc định, sắp xếp các dòng theo thứ tự tăng dần, nghĩa các chữ cái thường trong ví dụ của chúng tra ngắn hơn chữ cái viết hoa. Bây giờ, chuẩn bị một tệp so sánh các chuỗi giống nhau:
+
+```
+#!/bin/bash
+val1=Duonghuy
+val2=duonghuy
+if [ $val1 \> $val2 ]
+then
+echo "$val1 dài hơn $val2"
+else
+echo "$val1 ngắn hơn $val2"
+fi
+```
+
+Nếu chạy nó, hiện thị điều ngược lại là đúng:
+
+Lệnh so sánh có ít chữ hoa hơn. So sánh chuỗi ở đây được thực hiện bằng cách so sánh các mã ký tự ASCII, thứ tự sắp xếp do đó phụ thuộc vào các mã ký tự.
+
+Câu lệnh `sort`, lệnh sắp xếp sử dụng thứ tự sắp xếp được chỉ định trong cài đặt ngôn ngữ hệ thống.
+
+## File checks
+Các lệnh dưới đây được sử dụng phổ biến nhất trong các tệp lệnh bash. Chúng cho phép bạn kiểm tra các điều kiện khác nhay liên quan đến tệp. Đây là danh sách lệnh.
+
+|Lệnh| Ý nghĩa|
+|-|-|
+|-d file|Kiểm tra file có tồn tại và là một thư mục hay không|
+|-e file|Kiểm tra file có tồn tại không|
+|-f file|Kiểm tra file có tồn tại và là tệp không|
+|-r file|Kiểm tra file có tồn tại và có thể đọc được không|
+|-s file|Kiểm tra file có tồn tại không và tệp có trống rỗng không|
+|-w file|Kiểm tra file có tồn tại và có thể ghi được không|
+|-x file|Kiểm tra file có tồn tại và có thể thực thi không|
+|file1 -nt file2|Kiểm tra nếu `file1` mới hơn `file2`|
+|file1 -ot file2|Kiểm tra nếu `file1` cũ hơn `file2`|
+|-O file|Kiểm tra xem tệp có tồn tại và thược sở hữu của người dùng hiện tại không|
+|-G file|Kiểm tra xem tệp có tồn tại hay không và ID group của nó có khớp với ID group của người dùng hiện tại không|
+
+Ví dụ:
+Script này để kiểm tra trong thư mục `/home/huydv` có file nào tồn tại và có phải là thư mục hay không:
+
+```
+#!/bin/bash
+mydir=/home/huydv
+if [ -d $mydir ]
+then
+echo "Thư mục $mydir tồn tài"
+cd $mydir
+ls
+else
+echo "Thư mục $mydir không tồn tài"
+fi
+```
+
+Kết quả:
+
+```
+[huydv@srv ~]$ ./file
+Thư mục /home/huydv tồn tài
+file  file1  myfile
+```
+
+Thư mục tồn tại và có 3 file bên trong
+
+Hãy thử với các ví dụ còn lại để có cái nhìn tổng quan hơn
+
+Cám ơn các bạn đã xem.
+
+Link tham khảo:
+
+https://medium.com/introduction-into-bash/bash-scripts-part-1-getting-started-2a6cec26852
