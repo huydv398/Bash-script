@@ -120,7 +120,7 @@ Input:
 ```
 #!/bin/bash
 
-# Vòng lặp đươc chạy trong thư mục **/root/***
+# Vòng lặp đươc chạy trong thư mục /root/
 for file in /root/*
 do
 
@@ -175,9 +175,9 @@ Dùng để đặt một lệnh để kiểm tra một điều kiện nhất đ�
 
 Cấu trúc:
 ```
-while <câu lệnh để kiểm tra điều kiện>
+while [ <điều kiện lệnh> ]
 do 
-<nếu đúng chạy câu lệnh này>
+<nếu đk đúng chạy lệnh ở đây>
 done
 ```
 
@@ -381,8 +381,6 @@ Input:
 for (( a = 1; a < 6; a++ ))
 do
 echo "Số $a"
-done > myfile.txt
-echo "Hoàn thành."
 ```
 
 Output:
