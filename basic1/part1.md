@@ -242,6 +242,7 @@ Sử dụng cách tiếp cận đầu tiên, hãy cẩn thận không sử dụn
 # Test backtick  variables
 
 # Khai báo biến
+# Trong dấu nháy phải là một lệnh có ý nghĩa
 mydir=`pwd`
 
 #Thực thi
@@ -255,6 +256,7 @@ Hoặc
 # Test construction variables
 
 # Khai báo biến
+# Trong dấu ngoặc tròn phải là một lệnh có ý nghĩa
 mydir=$(pwd)
 
 #Thực thi
