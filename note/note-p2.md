@@ -20,6 +20,7 @@ fi
 done
 ```
 ### Vòng lặp while
+Nếu đúng điều kiện thực hiện vòng lặp, sai không thực hiện.
 ```
 #Biến cho trước
 var =5

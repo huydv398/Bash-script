@@ -2,13 +2,13 @@
 * `;` ngăn cách các lệnh trên cùng một dòng.
 * `#/bin/bash`: phải thêm vào đầu tiên khi thực hiện bash-script
 * `\` được thêm trước $: để được hiện thị không hiểu là biến.
-* `mydir=`pwd`` = `mydir=$(pwd)`
+* mydir=`pwd` = `mydir=$(pwd)`
 * Phép toán học: `$((a+b))`
 * Cấu trúc `if then`:
 ```
-if pwd
+if [Điều kiên]
 then
-echo "Thư mục của tôi"
+[cmd]
 fi
 ```
 * `if-the-else`:
