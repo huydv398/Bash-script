@@ -95,3 +95,31 @@ dr-xr-xr-x. 17 root  root  224 May  3 10:42 ..
 drwx------.  2 huydv huydv 154 May 11 10:44 huydv
 ```
 
+Lệnh exec có thể được sử dụng:
+```
+#!/bin/bash
+exec 2>myerror
+echo "Đây là phần bắt đầu của tập lệnh"
+echo "bây giờ chuyển hướng tất cả đầu ra đến một vị trí khác"
+exec 1>myfile
+echo "Điều này sẽ chuyển đến tệp myfile"
+echo "và điều này sẽ xảy ra vào tệp myerror" >&2
+```
+
+Đầu tiền exec thiết lập chuyển hướng `STDERR` đến **myerror**, sau đó, Kết quả được `echo` gửi đến STDOUT và hiển thị. sau đó, `exec` thiết lập bất cứ điều gì đi qua thì chuyển `STDOUT` đến **myfile**. Cuối cùng chuyển `STDERR` trong `echo` dẫn đến **myerror**
+
+Output:
+```
+Đây là phần bắt đầu của tập lệnh
+bây giờ chuyển hướng tất cả đầu ra đến một vị trí khác
+[root@1data bash]#  cat ./myerror
+và điều này sẽ xảy ra vào tệp myerror
+[root@1data bash]# cat ./myfile
+Điều này sẽ chuyển đến tệp myfile
+```
+
+
+## Tạo bộ mô tả tệp để nhập dữ liệu
+Bạn có thể chuyển hướng đầu vào trong tệp lệnh theo cách giống như đầu ra. Lưu trữ STDIN trong bộ mô tả khác trước khi chuyển hướng đầu vào.
+
+Sau khi đọc xong tệp, bạn có thể khôi phục STDIN và sử dụng nó như bình thường
