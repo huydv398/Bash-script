@@ -62,6 +62,8 @@ Thực hiện lệnh với đối số là ký tự theo sao câu lệnh:
 Hello, 
 [root@hdv ~]# ./hello.sh Huydv
 Hello, Huydv
+[root@hdv ~]# ./hello.sh Hà Nội
+Hello, Hà
 [root@hdv ~]# ./hello.sh  "Hà Nội"
 Hello, Hà Nội
 [root@hdv ~]# ./hello.sh World
@@ -70,6 +72,7 @@ Hello, World
 * Câu lệnh đầu tiên là không có đối số. 
 * Câu lệnh thứ 2, đối số bằng với một chuỗi
 * Câu lệnh thứ 3, đối với chuỗi có phân cách nhau bằng dấu cách, đối số `$1` chỉ được ứng với 1 chuỗi đầu tiền sau câu lệnh.
+* Để xử lý câu lệnh thứ 3 không hiện thị được chuỗi thì ta cần thêm dấu ngoặc kép cho câu lệnh
 ## 3. Hello World with user Input
 
 Phần sau sẽ nhắc người dùng nhập dữ liệu sau đó lưu thông tin văn bản dưới dạng string (text) trong một biến. Biến sau đó được sử dụng để in thông điệp cho người dùng
