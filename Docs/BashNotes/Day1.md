@@ -62,11 +62,10 @@ Thực hiện lệnh với đối số là ký tự theo sao câu lệnh:
 Hello, 
 [root@hdv ~]# ./hello.sh Huydv
 Hello, Huydv
-[root@hdv ~]# ./hello.sh Hà nội
-Hello, Hà
+[root@hdv ~]# ./hello.sh  "Hà Nội"
+Hello, Hà Nội
 [root@hdv ~]# ./hello.sh World
 Hello, World
-[root@hdv ~]# 
 ```
 * Câu lệnh đầu tiên là không có đối số. 
 * Câu lệnh thứ 2, đối số bằng với một chuỗi
