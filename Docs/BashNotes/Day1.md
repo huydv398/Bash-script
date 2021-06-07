@@ -1,4 +1,7 @@
 # Getting started with Bash
+1. [Hello Word](#1)
+2. [Script shebang](#2)
+<a name=1></a>
 ## Phần 1 Hello Word
 ### Interactive Shell
 Bash Shell thường được sử dụng tương tác: Nó cho phép nhập và chỉnh sửa các lệnh, sau đó thực thi chúng khi bạn nhấn return. Nhiều hệ điều hành Unix-base và Unix-like làm bash mặc định (Đặc biệt là linux và MacOS). Thiết bị đầu cuối tự động nhập một chương trình Bash shell tương tác khi khởi động. Nhập hello world bằng cách gõ như sau:
@@ -10,7 +13,7 @@ Xin chao
 ```
 * **echo** là một lệnh trong bash ghi các đối số mà nó nhận được vào đầu ra tiêu chuẩn. Nó thêm một dòng mới vào đầu ra.
 
-### Non-Interactive Shell - Shell không tương tác
+### 1.1 Non-Interactive Shell - Shell không tương tác
 Bash shell cũng có thể chạy không tương tác từ một script, làm làm shell không cần sự tương tác từ con người. Hành vi tương tác và hành vi theo tập lệnh phải  giống nhau- một cân nhắc phải thiết kế quan trọng của Unix V7 Bourne shele và ạm dịch là bash. Do đó bất cứ điều gì có thể thực hiển được ở dòng lệnh đều có thể được đưa vào script để sử dụng lại.
 
 Làm theo các bước để tạo một script **Hello world**:
@@ -38,7 +41,7 @@ Các lỗi thường gặp bao gồm:
 * Không áp dụng quyền thực thi trên tệp, `chmod +x script.sh` khi thực thi sẽ xuất hiện `-bash: ./script.sh: Permission denied`
 * Chỉnh sửa tệp lệnh trên Window, tạo ra các ký tự kết thúc dòng không chính xác mà bash không thể xử lý. 
 * Sử dụng `sh ./hello.sh`, không nhận ra rằng bash và sh là các shell riêng biệt(mặc dù bash tương thích ngược). Dù sao chỉ cần dựa vào các dòng shebang của script là rất thích hợp để viết rõ rằng bash hoặc sh(hoặc python ,perl, awk hoặc ruby) trước tên tệp của mỗi script. Một dòng shebang phổ biết được sử dụng để làm cho tập lệnh của bạn dễ di chuyển hơn là sử dụng `#!/usr/bin/env bash` thay vì mã hóa cứng đường dẫn đến bash. Theo cách đó, `/usr/bin/env` phải tồn tại nhưng ngoài thời điểm đó, chỉ cần bash có ở trên PATH của bạn. Trên nhiều hệ thống, /bin/bash không tồn tại và bạ nên sử dụng /usr/local/bin/bash hoặc một số đường dẫn tuyệt đối khác; thay đổi này tránh phải tìm ra các chi tiết của 
-### 2. Hello World sử dụng biến
+### 1.2 Hello World sử dụng biến
 Tạo một file `hello.sh` với nội dung và cấp quyền thực thi
 ```
 #!/usr/bin/env bash 
@@ -73,7 +76,7 @@ Hello, World
 * Câu lệnh thứ 2, đối số bằng với một chuỗi
 * Câu lệnh thứ 3, đối với chuỗi có phân cách nhau bằng dấu cách, đối số `$1` chỉ được ứng với 1 chuỗi đầu tiền sau câu lệnh.
 * Để xử lý câu lệnh thứ 3 không hiện thị được chuỗi thì ta cần thêm dấu ngoặc kép cho câu lệnh
-### 3. Hello World with user Input
+### 1.3 Hello World with user Input
 
 Phần sau sẽ nhắc người dùng nhập dữ liệu sau đó lưu thông tin văn bản dưới dạng string (text) trong một biến. Biến sau đó được sử dụng để in thông điệp cho người dùng
 
@@ -115,7 +118,7 @@ Bạn đang làm gì?
 chạy
 Bạn đang chạy ở bờ hồ.
 ```
-### 4. Tầm quan trọng của trích dẫn chuỗi
+### 1.4 Tầm quan trọng của trích dẫn chuỗi
 Trích dẫn rất quan trọng trong việc mở rộng chuỗi trong bash. Với những điều này, bạn có thể kiểm soát bash phân tích cú pháp và mở rộng chuỗi của bạn.
 
 Có hai loại qouting - trích dẫn:
@@ -157,10 +160,10 @@ Output:
 [root@hdv ~]# ./hello.sh
 Hello $world
 ```
-### 5. Xem thông tin cho tích hợp sẵn của Bash 
+### 1.5 Xem thông tin cho tích hợp sẵn của Bash 
 `help [command]`: Dùng để xe thông tin, cách sử dụng và các tùy chọn có trong câu lệnh
 
-### 6. Chế độ "Debug"
+### 1.6 Chế độ "Debug"
 ```
 [root@hdv ~]# cat hello.sh 
 #!/usr/bin/env bash
@@ -204,7 +207,7 @@ expr: non-integer argument
 ```
 
 `bash hello.sh`- Lỗi được nhắc không thể thực hiện tập lệnh nhưng sử dụng `bash -x hello.sh` sẽ biết lệnh đang bị lỗi ở đâu
-
+<a name=2></a>
 ## Phần 2 Script shebang
 ### 2. ENV Shebang
 Để thực thi một script với tệp thực thi bash được tìm thấy trong biến môi trường PATH bằng cách sử dụng tệp thực thi env, Dòng đầu tiên của script phải chỉ ra đường dẫn tuyệt đối đến tệp thực thi env với đối số là **bash**:
