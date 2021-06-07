@@ -1,5 +1,6 @@
 # Navigating directories & Listing Files
 1. [Navigating directories - Điều hướng thư mục](#1)
+2. [Listing Files - Liệt kê file và thư mục](#2)
 <a name=1></a>
 ## Navigating directories - Điều hướng thư mục
 ### 1.1 Absolute vs relative directories
@@ -65,7 +66,7 @@ Câu lệnh trên thực hiện chạy 3 lệnh:
 1. `readlink -f "$0"` xác định đường dẫn đến script hiện tại ($0)
 2. `dirname` chuyển đổi đường dẫn đến script thành đường dẫn đến thư mục của nó
 3. `cd` Thay đổi thư mục làm việc hiện tại thành thư mục mà nó nhận được từ `dirname`
-
+<a name=2></a>
 # Listing Files
 ## 2.1 Liệt kê file ở định dạng danh sách dài
 Tùy chọn `-l` của lệnh `ls` hiển thị nội dung của thư mục cụ thể ở định dạng danh sách dài. Nếu không có đối số của thư mục chỉ định chỉ nó sẽ hiển thị nội dung của thư mục hiện tại. 
