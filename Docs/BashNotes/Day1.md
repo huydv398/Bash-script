@@ -246,6 +246,7 @@ Nếu một tệp bắt đầu với dòng đầu tiên bằng chuỗi  #! thì 
 Nếu kernel đọc được dòng này, nó sẽ gọi trình thông dịch được đặt tên theo tên đường dẫn này và đưa các từ trong dòng làm đối số thông dịch.
 
 ```
-#!/bin/bash something wrong
+#!/usr/bin/env something 
 echo "Không in được"
 ```
+Sẽ không thực thi được câu lệnh vì trong /usr/bin/evn không có trình thông dịch something, something không thể xử lý được lệnh
