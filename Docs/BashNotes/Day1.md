@@ -38,7 +38,7 @@ Các lỗi thường gặp bao gồm:
 * Không áp dụng quyền thực thi trên tệp, `chmod +x script.sh` khi thực thi sẽ xuất hiện `-bash: ./script.sh: Permission denied`
 * Chỉnh sửa tệp lệnh trên Window, tạo ra các ký tự kết thúc dòng không chính xác mà bash không thể xử lý. 
 * Sử dụng `sh ./hello.sh`, không nhận ra rằng bash và sh là các shell riêng biệt(mặc dù bash tương thích ngược). Dù sao chỉ cần dựa vào các dòng shebang của script là rất thích hợp để viết rõ rằng bash hoặc sh(hoặc python ,perl, awk hoặc ruby) trước tên tệp của mỗi script. Một dòng shebang phổ biết được sử dụng để làm cho tập lệnh của bạn dễ di chuyển hơn là sử dụng `#!/usr/bin/env bash` thay vì mã hóa cứng đường dẫn đến bash. Theo cách đó, `/usr/bin/env` phải tồn tại nhưng ngoài thời điểm đó, chỉ cần bash có ở trên PATH của bạn. Trên nhiều hệ thống, /bin/bash không tồn tại và bạ nên sử dụng /usr/local/bin/bash hoặc một số đường dẫn tuyệt đối khác; thay đổi này tránh phải tìm ra các chi tiết của 
-## 2. Hello World sử dụng biến
+### 2. Hello World sử dụng biến
 Tạo một file `hello.sh` với nội dung và cấp quyền thực thi
 ```
 #!/usr/bin/env bash 
@@ -73,7 +73,7 @@ Hello, World
 * Câu lệnh thứ 2, đối số bằng với một chuỗi
 * Câu lệnh thứ 3, đối với chuỗi có phân cách nhau bằng dấu cách, đối số `$1` chỉ được ứng với 1 chuỗi đầu tiền sau câu lệnh.
 * Để xử lý câu lệnh thứ 3 không hiện thị được chuỗi thì ta cần thêm dấu ngoặc kép cho câu lệnh
-## 3. Hello World with user Input
+### 3. Hello World with user Input
 
 Phần sau sẽ nhắc người dùng nhập dữ liệu sau đó lưu thông tin văn bản dưới dạng string (text) trong một biến. Biến sau đó được sử dụng để in thông điệp cho người dùng
 
@@ -115,7 +115,7 @@ Bạn đang làm gì?
 chạy
 Bạn đang chạy ở bờ hồ.
 ```
-## 4. Tầm quan trọng của trích dẫn chuỗi
+### 4. Tầm quan trọng của trích dẫn chuỗi
 Trích dẫn rất quan trọng trong việc mở rộng chuỗi trong bash. Với những điều này, bạn có thể kiểm soát bash phân tích cú pháp và mở rộng chuỗi của bạn.
 
 Có hai loại qouting - trích dẫn:
@@ -157,10 +157,10 @@ Output:
 [root@hdv ~]# ./hello.sh
 Hello $world
 ```
-## 5. Xem thông tin cho tích hợp sẵn của Bash 
+### 5. Xem thông tin cho tích hợp sẵn của Bash 
 `help [command]`: Dùng để xe thông tin, cách sử dụng và các tùy chọn có trong câu lệnh
 
-## 6. Chế độ "Debug"
+### 6. Chế độ "Debug"
 ```
 [root@hdv ~]# cat hello.sh 
 #!/usr/bin/env bash
@@ -205,3 +205,44 @@ expr: non-integer argument
 
 `bash hello.sh`- Lỗi được nhắc không thể thực hiện tập lệnh nhưng sử dụng `bash -x hello.sh` sẽ biết lệnh đang bị lỗi ở đâu
 
+## Phần 2 Script shebang
+### 2. ENV Shebang
+Để thực thi một script với tệp thực thi bash được tìm thấy trong biến môi trường PATH bằng cách sử dụng tệp thực thi env, Dòng đầu tiên của script phải chỉ ra đường dẫn tuyệt đối đến tệp thực thi env với đối số là **bash**:
+
+`#!/usr/bin/env bash`
+
+Đường dẫn env trong shebang được giải quyết và chỉ được sử dụng nếu một tệp lệnh được khởi chạy trực tiếp như thế này:
+
+`script.sh`
+
+Tệp lệnh phải có quyền thực thi
+
+Shebang bị bỏ qua khi một trình thông dịch bash được chỉ định rõ ràng để thực thi một script:
+
+`bash script.sh`
+
+### 2.2 Direct shebang
+Để thực thi một tệp script với trình thông dịch bash, dòng đầu tiên của tệp lệnh phải chỉ ra đường dẫn tuyệt đối đến bash thực thi để sử dụng:
+
+`#!/bin/bash`
+
+Đường dẫn bash trong she bang được giải quyết và chỉ được sử dụng khi một script được khởi chạy trực tiếp như này:
+
+`./script.sh`
+
+Script phải được cấp quyền thực thi.
+
+Shebang bị bỏ qua khi một trình thông dịch bash được chỉ định rõ ràng để thực thi một tệp lệnh:
+
+`bash script.sh`
+### 2.3 Other shebangs
+Có 2 loại chương trình mà kernel biết. Một chương trình nhị phân được xác định bởi tiêu đề ELF(ExtenableLoadableFormat - Định dạng có thể tái mở rộng), thường được tạo bởi trình biên dịch. Thứ hai là kịch bản của bất kỳ loại nào.
+
+Nếu một tệp bắt đầu với dòng đầu tiên bằng chuỗi  #! thì tiếp theo phải là tên đường dẫn của trình thông dịch.
+
+Nếu kernel đọc được dòng này, nó sẽ gọi trình thông dịch được đặt tên theo tên đường dẫn này và đưa các từ trong dòng làm đối số thông dịch.
+
+```
+#!/bin/bash something wrong
+echo "Không in được"
+```

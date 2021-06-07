@@ -11,7 +11,7 @@
 1. [Part-9](Docs/basic1/part9.md)
 ## BashNotesForProfessionals 
 1. [Day1 - Getting started with Bash](Docs/BashNotes/Day1.md)
-1. [Day-](Docs/BashNotes/Day2.md)
+1. [Day2 - Navigating directories](Docs/BashNotes/Day2.md)
 1. [Day-](Docs/BashNotes/Day3.md)
 1. [Day-](Docs/BashNotes/Day4.md)
 1. [Day-](Docs/BashNotes/Day5.md)
