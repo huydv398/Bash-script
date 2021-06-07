@@ -204,4 +204,4 @@ expr: non-integer argument
 ```
 
 `bash hello.sh`- Lỗi được nhắc không thể thực hiện tập lệnh nhưng sử dụng `bash -x hello.sh` sẽ biết lệnh đang bị lỗi ở đâu
-## 7. Xử lý các đối số được đặt tên
+
