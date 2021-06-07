@@ -249,4 +249,4 @@ Nếu kernel đọc được dòng này, nó sẽ gọi trình thông dịch đ�
 #!/usr/bin/env something 
 echo "Không in được"
 ```
-Sẽ không thực thi được câu lệnh vì trong /usr/bin/evn không có trình thông dịch something, something không thể xử lý được lệnh
+Sẽ không thực thi được câu lệnh vì trong /usr/bin/evn không có trình thông dịch something, something không thể xử lý được lệnh.
