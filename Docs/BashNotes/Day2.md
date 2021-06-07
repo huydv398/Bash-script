@@ -1,5 +1,8 @@
-# Navigating directories - Điều hướng thư mục
-## 1. Absolute vs relative directories
+# Navigating directories & Listing Files
+1. [Navigating directories - Điều hướng thư mục](#1)
+<a name=1></a>
+## Navigating directories - Điều hướng thư mục
+### 1.1 Absolute vs relative directories
 Absolute vs relative directories - thư mục tuyệt đối và thư mục tương đối. Để thay đổi thành một thư mục được chỉ định tuyệt đối, hãy sử dụng toàn bộ tên, bắt đầu bằng dấu gạch chéo /:
 
 `cd /home/username/dir/sub-dir`
@@ -31,7 +34,7 @@ Customer/      Subscriptions/ Techonogy/
 ```
 Tại dòng 2 khi hiện tên các thư mục con là mình đã gõ tab tab để đề xuất các thư mục con hiện có trong thư mục hiện tại.
 
-## 2 Thay đổi đến thư sử dụng cuối cùng
+### 1.2 Thay đổi đến thư sử dụng cuối cùng
 `cd -`
 
 Được sử dụng để trở về thư mục bạn đã ở trước đó. Nếu sử dụng liên tục nó sẽ đưa bạn đến 2 thư mục mà bạn đã sử dụng lần cuối cùng.
@@ -64,7 +67,7 @@ Câu lệnh trên thực hiện chạy 3 lệnh:
 3. `cd` Thay đổi thư mục làm việc hiện tại thành thư mục mà nó nhận được từ `dirname`
 
 # Listing Files
-## Liệt kê file ở định dạng danh sách dài
+## 2.1 Liệt kê file ở định dạng danh sách dài
 Tùy chọn `-l` của lệnh `ls` hiển thị nội dung của thư mục cụ thể ở định dạng danh sách dài. Nếu không có đối số của thư mục chỉ định chỉ nó sẽ hiển thị nội dung của thư mục hiện tại. 
 ```
 [huydv@hdv ~]$ ls -l
