@@ -1,6 +1,8 @@
 # Day 3 Bash shell
 1. [Using cat ](#1)
-2. [](#2)
+2. [Grep](#2)
+3. [alias](#3)
+<a name=1></a>
 ## Using cat
 ### 1.1 Nối file
 `cat file1 file2 file3 >file_all`
@@ -57,16 +59,16 @@ Nếu bạn muốn hiển thị nội dung có in số dòng:
 ```
 ### 1.3 Viết vào file
 ```
-[huydv@hdv Customer]$ cat > file
+[huydv@hdv ]$ cat > file
 Vietnam 
 bash shell
-[huydv@hdv Customer]$ cat file 
+[huydv@hdv ]$ cat file 
 Vietnam
 bash shell
 
-[huydv@hdv Customer]$ cat >> file 
+[huydv@hdv ]$ cat >> file 
 Tutorial   
-[huydv@hdv Customer]$ cat file 
+[huydv@hdv ]$ cat file 
 Vietnam
 bash shell
 Tutorial
@@ -101,7 +103,7 @@ Sử dụng cờ `--number` hoặc `-n` để in số dòng trước mỗi dòng
 
 Sở dụng cờ `-b` in số dòng bỏ qua các dòng không có dữ liệu
 ```
-[huydv@hdv Picture]$ cat -b info.txt 
+[huydv@hdv ]$ cat -b info.txt 
      1  Username 
      2  1998
 
@@ -113,10 +115,10 @@ Sở dụng cờ `-b` in số dòng bỏ qua các dòng không có dữ liệu
 ### 1.6 Nối các tệp zip
 Các file được nén bởi gzip có thể được nối trực tiếp thành các tệp gzipped lớn hơn.
 ```
-[huydv@hdv Techonogy]$ gzip file1 file2 file3
-[huydv@hdv Techonogy]$ ls
+[huydv@hdv ]$ gzip file1 file2 file3
+[huydv@hdv ]$ ls
 file1.gz  file2.gz  file3.gz
-[huydv@hdv Techonogy]$ cat file1.gz file2.gz file3.gz > combined.gz
+[huydv@hdv ]$ cat file1.gz file2.gz file3.gz > combined.gz
 ```
 Khi thực hiện lệnh trên thì sẽ nén file và gộp 3 file nén vào 1 file gzip chung.
 
@@ -142,8 +144,53 @@ Hello world!
 Howdy world!
 ```
 2 câu lệnh đầu tiên thực hiện tạo 2 file mới. Dong 3 & 4 thực hiện 2 file. Dòng 5 thực hiện nén vào file chung. Dòng 6 thực hiện giải nén. Dòng cuối xem kết quả ở đây không phải là 2 file gzip là là kết quả đầu tiên của 2 file txt gộp lại.
-
+<a name=2></a>
 ## Grep
 Cách tìm kiếm một tệp cho mẫu
-* Để tìm từ 'hcd` trong file info.txt
+* Để tìm từ 'hcd` trong file ~/Picture/info.txt
 ![](image\Screenshot_2.png)
+* Để tìm ra tất cả các dòng không chứa từ hcd
+```
+[huydv@hdv ~]$ grep -v hcd ~/Picture/info.txt 
+Username 
+1998
+
+Hà Nội Việt Nam
+Covid
+```
+<a name=3></a>
+## Aliasing
+Shell alias là một cách đơn giản để tạo các lệnh mới hoặc đặt một tên gợi nhớ hơn cho các lệnh bằng mã của riêng bạn. 
+### 3.1 Bypass an alias
+Sử dụng lệnh ls mà không cần tắt alias. Bạn có một số tùy chọn:
+* Sử dụng nội trang lệnh: lệnh ls
+* Sử dụng đường dẫn đầy đủ của lệnh: `/bin/ls`
+* Thêm \ vào bất kỳ đâu trong tên lệnh, ví dụ: `\ls` hoặc `l\s`
+* Sử dụng trích dẫn lệnh: "ls" hoặc 'ls'
+### 3.2 Tạo alias
+`alias key= 'command'` hoặc `alas key = 'command [option]'`
+Khi sử dụng `key` như một lệnh để gắn cho command mà bạn đã khai báo.
+
+Để bao gồm nhiều lệnh trong một alias, bạn có thể xâu chuỗi chúng lại với nhau bằng `&&`.
+```
+[huydv@hdv ~]$ alias chao='echo "Xin" && echo "chao" && echo "Viet Nam" '
+[huydv@hdv ~]$ chao
+Xin
+chao
+Viet Nam
+```
+### 3.3 Xóa alias
+`unalias {alias_name}`
+
+```
+[huydv@hdv ~]$ alias chao='echo "Xin" && echo "chao" && echo "Viet Nam" '
+[huydv@hdv ~]$ alias
+alias chao='echo "Xin" && echo "chao" && echo "Viet Nam" '
+alias ls='ls --color=auto'
+
+...
+[huydv@hdv ~]$ unalias chao
+[huydv@hdv ~]$ chao
+bash: chao: command not found
+```
+
