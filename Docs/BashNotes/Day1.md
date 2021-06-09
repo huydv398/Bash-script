@@ -250,3 +250,12 @@ Nếu kernel đọc được dòng này, nó sẽ gọi trình thông dịch đ�
 echo "Không in được"
 ```
 Sẽ không thực thi được câu lệnh vì trong /usr/bin/evn không có trình thông dịch something, something không thể xử lý được lệnh.
+
+>**Lưu ý**: Sau khi bạn đọc xong day1 những điều cần nhớ:
+* Tạo file, file bash script.
+* Thêm quyền thực thi file bash script.
+* 3 cách để thực thi file bash script.
+* Cách sử dụng biến đơn giản, sử dụng chuỗi ký tự.
+* Đối số với câu lệnh.
+* Lệnh read.
+* Shebang

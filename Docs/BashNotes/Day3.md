@@ -188,9 +188,11 @@ Viet Nam
 alias chao='echo "Xin" && echo "chao" && echo "Viet Nam" '
 alias ls='ls --color=auto'
 
-...
+...tac
 [huydv@hdv ~]$ unalias chao
 [huydv@hdv ~]$ chao
 bash: chao: command not found
 ```
 
+>**Lưu ý**: Sau khi bạn đọc xong day 3 những điều cần nhớ:
+* Biết cách sử dụng của các lệnh sau: cat [option, printf with cat], less, more, tr, tac, gzip, gunzip, grep, alias. 

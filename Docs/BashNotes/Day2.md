@@ -178,3 +178,9 @@ drwxrwxr-x. 2 huydv huydv  6 Jun  7 05:06 Techonogy
 -rw-rw-r--. 1 huydv huydv  0 Jun  7 10:46 demo.md
 ```
 Muốn sắp xếp theo thứ tự tăng dần sử dụng `ls -lSr`
+
+>**Lưu ý**: Sau khi bạn đọc xong day 2 những điều cần nhớ:
+Điều hướng thư mục - liệt kê file và thư mục
+* Sử dụng đường dẫn tuyệt đối và đường dẫn tương đối
+* Sử dụng câu lệnh cd, readlink, firname, ls [option], tree, head.
+* Permission của thư mục
