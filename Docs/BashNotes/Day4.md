@@ -1,4 +1,8 @@
 # Job and Processes & Redirection
+1. [Job and Processes](#1)
+2. [Redirection](#2)
+
+<a name=1></a>
 
 ## 1.1 Xử lý công việc
 ### Creating jobs
@@ -130,6 +134,8 @@ root       9128  0.0  0.0 112816   976 pts/7    S+   16:45   0:00 grep --color=a
 Các hai cách phổ biến để liệt kê tất cả các quy trình trên một hệ thống. Liệt kê tất cả các process đang chạy bởi tất cả người dùng chúng khác nhau về định dạng mà chúng xuất ra
 * `ps -ef` 
 * `ps aux` 
+<a name=2></a>
+
 
 ## 2 Redirection- Chuyển hướng
 ### 2.1 Chuyển hướng đầu ra tiêu chuẩn
@@ -203,7 +209,247 @@ Vietnam
 ```
 
 ### 2.3 Chuyển hướng cả STDOUT và STDERR
-Các bộ tệp mô tả như 0 và là các con trỏ. Thay đổi trình mô tả file trỏ tới bằng chuyển hướng >/dev/null. Có nghĩa là 1 điểm đến /dev/null
+Các bộ tệp mô tả như 0 và là các con trỏ. Thay đổi trình mô tả file trỏ tới bằng chuyển hướng >/dev/null. Có nghĩa là 1 điểm đến /dev/null-là một tệp Thiết bị giả và thuộc loại tệp ký tự đặc biệt, chập nhận và loại bỏ tất cả đầu vào được ghi vào nó.
+
+Mọi thứ trong linux đều là một file, ngay cả các STDIN, STDOUT,STDERR cũng đều là file. Mỗi file đều có một định danh gì đó để có thể cầm lắm hay thao tác được. Còn `/dev/null` cũng là một device hay cũng là một file đặc biệt trong linux thường được sử dụng để chứa các dữ liệu rác từ các Input stream khi chúng ta không muốn sử lý hay muốn hiển thị nó.
 
 Đầu tiên chúng trỏ 1 (STDOUT) vào /dev/null sau đó trỏ 2(STDERR) vào một điểm bất kỳ nào.
 
+`echo 'hello' > /dev/null 2>&1`
+### 2.4 Using named pipes
+Đôi khi bạn muốn xuất một cái gì đó bằng một chương trình và nhập nó vào bằng một chương trình khác
+```
+[root@hdv ~]# ls -l |  grep 'h'
+-rwxr-xr-x. 1 root root        162 Jun  9 17:23 hello.sh
+drwxr-xr-x. 6 root root        247 May 22 07:46 python
+-rw-r--r--. 1 root root          0 Jun  5 16:39 script.sh
+```
+
+Bạn chỉ có thể ghi vào một tệp tạm thời:
+```
+[root@hdv dir]# ls /root/ > file
+[root@hdv dir]# grep ".txt" <file 
+file1.txt
+file2.txt
+file.txt
+logcmd.txt
+log.txt
+tempFile.txt
+```
+
+Điều này làm tốt cho hầu hết các ứng dụng, tuy nhiên, sẽ không ai biết **file** làm gì và ai đó có thể xóa nó nếu nó chứa output của lệnh ls.
+```
+[root@hdv dir]# mkfifo pipefile
+[root@hdv dir]# ls /root/ > pipefile &
+[4] 13540
+[root@hdv dir]# grep '.txt' <pipefile 
+file1.txt
+file2.txt
+file.txt
+logcmd.txt
+log.txt
+tempFile.txt
+[4]   Done                    ls --color=auto /root/ > pipefile
+[root@hdv dir]# ls -l
+total 4
+-rw-r--r--. 1 root root 158 Jun 10 03:07 file
+prw-r--r--. 1 root root   0 Jun 10 03:11 pipefile
+```
+
+Bạn không thể xem bằng lệnh cat vì pipefile vì nó được liệt kê là môt pipe, không phải file
+
+Khi tôi không sử dụng & ở cuối câu lệnh thì sẽ bị treo và hãy làm như sau: 
+```
+[root@hdv dir]# echo "hello my love" > pipefile &
+[4] 13558
+[root@hdv dir]# cat < pipefile 
+hello my love
+[4]   Done                    echo "hello my love" > pipefile
+```
+
+Bạn có thể nhận thấy sau khi lời chào được xuất ra, chương trình trương thiết bị được kết thúc tại đây.
+
+Named pipes có thể hữu ích cho việc di chuyển thông tin giữa các thiết bị đầu cuối hoặc giữa các chương trình.
+
+Một số ví dụ:
+```
+[root@hdv dir]#  { ls -l /home && cat file; } > mypipe &
+[4] 13620
+[root@hdv dir]# cat < mypipe 
+total 0
+drwx------. 3 huydv huydv 180 Jun  9 15:42 huydv
+anaconda-ks.cfg
+dir
+file
+file1
+file1.txt
+test
+[4]   Done                    { ls --color=auto -l /home && cat file; } > mypipe
+
+
+```
+### 2.5 Chuyển hướng đến các địa chỉ mạng
+Bash coi một số đường dẫn là đặc biệt và có thể thực hiện một só giao tiếp mạng bằng cách viết vào /dev/{udp|tcp}/host/port . Bash không thể thiết lập một máy chủ để lắng nghe, nhưng có thể bắt đầu kết nối và đối với TCP thì có thể đọc được kết quả.
+Lệnh exec khi sử dụng sẽ không nhận được STDOUT.
+```
+exec 3</dev/tcp/www.google.com/80
+printf 'GET / HTTP/1.0\r\n\r\n' >&3
+cat <&3
+```
+
+và kết quả của trang web sẽ được in ra  STDOUT
+
+
+### 2.6 In thông báo lỗi ra STDERR
+THông báo lỗi thường được bao gồm trong một script cho mục đích gỡ lỗi hoặc để cung cấp cho trải nghiệm người dùng phong phú.
+```
+[root@hdv huydv]# cmd || echo 'cmd failed'
+bash: cmd: command not found
+cmd failed
+```
+
+Có thể hoạt động với các trường hợp đơn giản nhưng không phải cách thông dụng. 
+```
+if cmd; then
+ echo 'success'
+else
+ echo 'cmd failed' >/dev/stderr
+fi
+```
+Trong ví dụ trên, thông báo success sẽ được in tren estou tron gkhi thông báo error sẽ được in stderr
+
+Cách tốt hơn để in ra thông báo lỗi là xác định một hàm:
+```
+err(){
+ echo "E: $*" >>/dev/stderr
+}
+
+```
+bây giờ sử dụng function vừa tạo để in ra lỗi:
+```
+[root@hdv huydv]# err
+E: 
+[root@hdv huydv]# err "Thông điệp lỗi"
+E: Thông điệp lỗi
+```
+
+### Chuyển hướng nhiều lệnh đến cùng một file
+```
+[root@hdv ]# {  echo "contents of home directory";  ls ; } > output.txt
+[root@hdv ]# cat output.txt 
+contents of directory
+file1
+file2
+file3
+output.txt
+```
+### 2.8 Chuyển hướng STDIN
+`<` đọc từ đối số bên phải và ghi vào đối số bên trái.
+
+```
+[root@hdv ]# echo "Error 
+> messages
+> generally
+> included
+> script
+> purposes
+> providing">fi
+[root@hdv ]# grep "script" < fi
+script
+[root@hdv huydv]# sort < fi
+Error 
+generally
+included
+messages
+providing
+purposes
+script
+```
+### 2.9 Chuyển hướng STDERR
+2 là STDERR
+
+`echo_to_stderr 2>/dev/null`
+
+echo_to_stderr là lệnh ghi "stderr" vào STDERR
+
+```
+[root@hdv ]# echo_to_stderr () {
+>  echo stderr >&2
+> }
+[root@hdv ]# echo_to_stderr
+stderr
+[root@hdv ]# echo_to_stderr () {
+>  echo "Lỗi khi thực hiện" >&2
+> }
+[root@hdv ]# echo_to_stderr
+Lỗi khi thực hiện
+```
+
+### 2.10 Giải thích STDIN, STDOUT, STDERR 
+Câu lệnh có một đầu vào (STDIN) và có 2 đầu ra, đầu ra tiêu chuẩn hay standard output (STDOUT) và Lỗi tiêu chuẩn standard error (STDERR).
+
+**STDIN**
+
+```
+[root@hdv huydv]# read
+Nhập văn bản vào đây
+```
+Được sử dụng để cung cấp đầu vào cho một trương trình
+
+**STDOUT**
+```
+[root@hdv ]# whoami
+root
+[root@hdv huydv]# ll
+total 16
+-rw-r--r--. 1 root  root    61 Jun 11 05:22 fi
+-rw-r--r--. 1 root  root  1612 Jun 11 04:46 fileout
+-rw-r--r--. 1 root  root     0 Jun  9 15:41 log.txt
+-rw-r--r--. 1 root  root   185 Jun 11 05:15 output.txt
+```
+Các câu lệnh sử dụng cho đầu ra bình thường. nội dung xuất ra được gửi đến STDOUT
+
+**STDERR**
+```
+[root@hdv huydv]# cmd
+bash: cmd: command not found
+[root@hdv huydv]# haha
+bash: haha: command not found
+[root@hdv huydv]# ls tệp
+ls: cannot access tệp: No such file or directory
+```
+Được sử dụng cho các thông báo lỗi. Vì thông điệp này không phải danh sách các tệp, nó được gửi đến STDERR
+
+STDIN, STDOUT and STDERR là ba luồng tiêu chuẩn được xác định với shell bằng một con số
+0 = Standard in
+1 = Standard out
+2 = Standard error
+
+Mặc dịnh STDIN là bàn phím. STDOUT và STDERR đều được xuất hiện trong thiết bị đầu cuối(màn hình, remote)
+
+Bạn có thể chuyển hướng STDERR hoặc STDOUT đến bất kỳ thứ gì chúng ta cần. Giả sử bạn chỉ muốn in ra màn hình STDOUT và loại bỏ tất cả cac STDERR
+
+**Redirecting STDERR to /dev/null**
+```
+[root@hdv huydv]# ls
+fi  fileout  log.txt  output.txt  Picture  test.sh
+[root@hdv huydv]# ls ls anotherfile 2>/dev/null
+[root@hdv huydv]# ls file anotherfile 2>/dev/null
+[root@hdv huydv]# ls file anotherfile 
+ls: cannot access file: No such file or directory
+ls: cannot access anotherfile: No such file or directory
+```
+
+Bạn sẽ không thể nhận được bất kỳ đầu ra lỗi nào trên màn hình hiển thị
+
+> **Chú ý**: Những điều cần ghi nhớ và làm được:
+Job and Processes & Redirection
+* Job và process trong linux? Lệnh dùng để liệt kê process và job
+* Lệnh fg và bg sử dụng để làm gì?
+* Lệnh kill
+* lsof dùng để kiểm tra các process chạy trên poort cụ thể
+* Truncate > và Append >>
+* lệnh mkfifo sử dụng làm gì?
+* Chuyển hướng đến các địa chỉ mạng
+* Chuyển hướng STDIN <
+* STDIN, STDOUT, STDERR 
