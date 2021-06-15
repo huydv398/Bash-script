@@ -26,7 +26,7 @@ Các tham số dùng để kiểm tra hoặc test:
 |`"$int1" {toán tử} "$int2"`|Details|
 |-|-|
 | `-eq` |**equal** - đúng nếu các số nguyên bằng nhau|
-| `-ne` **|not equals** - đúng nếu các số nguyên không bằng nhau|
+| `-ne` |**not equals** - đúng nếu các số nguyên không bằng nhau|
 | `-gt` |**greater than** - đúng nếu `$int1` lớn hơn `$int2` |
 | `-ge` |**greater than or equal** - đúng nếu `$int1` lớn hơn hoặc bằng `$int2`|
 | `-lt` |**less than** - đúng nếu `$int1` Nhỏ hơn `$int2` |
