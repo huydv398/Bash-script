@@ -15,12 +15,15 @@ Các tham số dùng để kiểm tra hoặc test:
 
 * So sánh chuỗi
 
+|File Operators|Details|
+|-|-|
 |-z "$str"|True nếu độ dài chuỗi =0|
 |-n "$str|True nếu độ dài chuỗi khác 0|
 |"$str" = "$str2"|True nếu chuỗi $str bằng chuỗi $str2|
 |"$str" != "$str2"|True nếu chuỗi $str không bằng chuỗi $str2|
 * So sánh số nguyên(integer)
-
+|File Operators|Details|
+|-|-|
 |"$int1" {toán tử} "$int2"|Details|
 | -eq |equal- đúng nếu các số nguyên bằng nhau|
 | -ne |not equals- đúng nếu các số nguyên không bằng nhau|
