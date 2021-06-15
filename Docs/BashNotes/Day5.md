@@ -8,29 +8,29 @@ Các tham số dùng để kiểm tra hoặc test:
 
 |File Operators|Details|
 |-|-|
-|-e "$file"|Trả về true nếu tệp tồn tại|
-|-d "$file"|Trả về true nếu tồn tại và là một thư mục|
-|-f "$file"|Trả về true nếu tồn tại và là tệp thông thường|
-|-h "$file"|Trả về true nếu tồn tại và là một liên kết tượng trưng(a symbolic link) |
+|`-e "$file"`|Trả về true nếu tệp tồn tại|
+|`-d "$file"`|Trả về true nếu tồn tại và là một thư mục|
+|`-f "$file"`|Trả về true nếu tồn tại và là tệp thông thường|
+|`-h "$file"`|Trả về true nếu tồn tại và là một liên kết tượng trưng(a symbolic link) |
 
 * So sánh chuỗi
 
 |File Operators|Details|
 |-|-|
-|-z "$str"|True nếu độ dài chuỗi =0|
-|-n "$str|True nếu độ dài chuỗi khác 0|
-|"$str" = "$str2"|True nếu chuỗi $str bằng chuỗi $str2|
-|"$str" != "$str2"|True nếu chuỗi $str không bằng chuỗi $str2|
+|`-z "$str"`|True nếu độ dài chuỗi =0|
+|`-n "$str`|True nếu độ dài chuỗi khác 0|
+|`"$str" = "$str2"`|True nếu chuỗi `$str` bằng chuỗi `$str2`|
+|`"$str" != "$str2"`|True nếu chuỗi `$str` không bằng chuỗi `$str2`|
 * So sánh số nguyên(integer)
-|File Operators|Details|
+
+|`"$int1" {toán tử} "$int2"`|Details|
 |-|-|
-|"$int1" {toán tử} "$int2"|Details|
-| -eq |equal- đúng nếu các số nguyên bằng nhau|
-| -ne |not equals- đúng nếu các số nguyên không bằng nhau|
-| -gt |greater than- đúng nếu $int1 lớn hơn $int2 |
-| -ge |greater than or equal- đúng nếu $int1 lớn hơn hoặc bằng $int2|
-| -lt |less than- đúng nếu $int1 Nhỏ hơn $int2 |
-| -le | less than or equal- đúng nếu $int1 Nhỏ hơn hoặc bằng $int2|
+| `-eq` |**equal** - đúng nếu các số nguyên bằng nhau|
+| `-ne` **|not equals** - đúng nếu các số nguyên không bằng nhau|
+| `-gt` |**greater than** - đúng nếu `$int1` lớn hơn `$int2` |
+| `-ge` |**greater than or equal** - đúng nếu `$int1` lớn hơn hoặc bằng `$int2`|
+| `-lt` |**less than** - đúng nếu `$int1` Nhỏ hơn `$int2` |
+| `-le` | **less than or equal** - đúng nếu `$int1` Nhỏ hơn hoặc bằng `$int2`|
 
 ### 1.1 Thực hiện có điều kiện của danh sách lệnh
 * Cách sử dụng có điều kiện của danh sách lệnh
