@@ -5,18 +5,22 @@
 
 Các tham số dùng để kiểm tra hoặc test:
 * Tham số àm việc với file:
+
 |File Operators|Details|
 |-|-|
 |-e "$file"|Trả về true nếu tệp tồn tại|
 |-d "$file"|Trả về true nếu tồn tại và là một thư mục|
 |-f "$file"|Trả về true nếu tồn tại và là tệp thông thường|
 |-h "$file"|Trả về true nếu tồn tại và là một liên kết tượng trưng(a symbolic link) |
+
 * So sánh chuỗi
+
 |-z "$str"|True nếu độ dài chuỗi =0|
 |-n "$str|True nếu độ dài chuỗi khác 0|
 |"$str" = "$str2"|True nếu chuỗi $str bằng chuỗi $str2|
 |"$str" != "$str2"|True nếu chuỗi $str không bằng chuỗi $str2|
 * So sánh số nguyên(integer)
+
 |"$int1" {toán tử} "$int2"|Details|
 | -eq |equal- đúng nếu các số nguyên bằng nhau|
 | -ne |not equals- đúng nếu các số nguyên không bằng nhau|
@@ -300,7 +304,7 @@ i=0
 while [ $i -lt 5 ] #While i nhỏ hơn 5
 do
     echo "i hiện tại: $i"
-    i=$[$i+1] Thực hiện xong i khai báo ban đầu sẽ cộng thêm 1 để tiếp tục thực hiện vòng lặp. Lưu ý không để khoảng trắng trong dấu ngoặc
+    i=$[$i+1] #Thực hiện xong i khai báo ban đầu sẽ cộng thêm 1 để tiếp tục thực hiện vòng lặp. Lưu ý không để khoảng trắng trong dấu ngoặc
 
 done #Kết thúc vòng lặp
 
