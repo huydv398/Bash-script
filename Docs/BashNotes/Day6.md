@@ -393,3 +393,7 @@ done
 Thực hiện nhập dữ liệu phân tách khi xuống dòng, để thực hiện dừng lại **Ctr Z**.
 ### Function chèn mảng
 Funtion sẽ chèn một phần tử vào một mảng tại một chỉ mục duy nhất:
+
+## Mảng liên kết
+### Kiểm tra mảng giả định
+Tất cả mức sử dụng cần thiết được hiển thị với đoạn mã:

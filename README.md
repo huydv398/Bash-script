@@ -16,7 +16,7 @@
 1. [Day4 - Job and Processes & Redirection ](Docs/BashNotes/Day4.md)
 1. [Day5 - Control Structures. True, false and : commands](Docs/BashNotes/Day5.md)
 1. [Day6 - Arrays(Mảng)](Docs/BashNotes/Day6.md)
-1. [Day-](Docs/BashNotes/Day7.md)
+1. [Day7 - Funtion](Docs/BashNotes/Day7.md)
 1. [Day-](Docs/BashNotes/Day8.md)
 1. [Day-](Docs/BashNotes/Day9.md)
 1. [Day-](Docs/BashNotes/Day10.md)
