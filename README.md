@@ -40,3 +40,5 @@
 1. [Day-](Docs/BashNotes/Day28.md)
 1. [Day-](Docs/BashNotes/Day29.md)
 1. [Day-](Docs/BashNotes/Day30.md)
+## bash script
+1. [script install wordpress in centos7](Docs/script/wp-c7.sh)
