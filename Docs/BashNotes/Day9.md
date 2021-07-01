@@ -160,7 +160,7 @@ find -type f -size 24
 4. k: 1KB
 5. M: 1MB
 6. G: 1 GB
-### Tìm kiếm theo đường dẫn
+### 2.5 Tìm kiếm theo đường dẫn
 Tham số `-path` cho phép chỉ định một mẫu để khớp với đường dẫn của kết quả. Mẫu cũng có thể phù hợp với tên của chính nó.
 
 * Để tìm các tệp chứa **log** ở bất kỳ đâu:
@@ -216,7 +216,7 @@ Ví dụ, muốn tìm tất cả các tệp các phần mở rộng là `.sh` t�
 ./install-wp.sh
 ```
 sort: để sắp xếp dữ leieuj trong các tệp theo một trình tự
-## 1.1 Câu lệnh sort -output
+## 3.1 Câu lệnh sort -output
 Sort dùng để sắp xếp một danh sách các dòng
 * Đầu vào từ một file
 ```
@@ -226,7 +226,7 @@ sort text.txt
 ```
 cat text | sort
 ```
-## 1.2 Tạo đầu ra duy nhất
+## 3.2 Tạo đầu ra duy nhất
 Nếu mỗi dòng của đầu ra cần phải là duy nhất, hãy thêm tùy chọn `-u`-(unique)
 
 Liệt kê size của tệp trong thư mục, hiển thị được lọc để không trùng lặp
@@ -237,7 +237,7 @@ nobody
 root
 ```
 sourcing
-## 2.1 Tìm nguồn cung cấp tệp
+## 4.1 Tìm nguồn cung cấp tệp
 Tìm nguồn cung ứng với một tệp khác với việc thực thi, ở chỗ tất cả các lệnh được đánh giá trong ngữ cảnh của phiên bash hiện tại - điều này có nghĩa là bất kỳ biến, hàm hoặc bí danh nào được xác định sẽ tồn tại trong xuốt phiên của bạn.
 
 Tạo một file **test.sh**
@@ -269,7 +269,7 @@ Hello Everyone
 ```
 [root@hd ~]# . test.sh 
 ```
-## 2.2 Sourcing một môi trường ảo
+## 4.2 Sourcing một môi trường ảo
 Khi phát triển một số ứng dụng trên máy, việc tách các phần phụ thuộc thành các phần phụ thuộc ra môi trường ảo sẽ trở nên hữu ích.
 
 Với việc sử dụng virtualenv, các môi trường được lấy nguồn từ shell của bạn để khi bạn chạy một lệnh, nó đến từ môi trường ảo đó. Điều này được cài đặt phổ biến nhất bằng cách sử dụng pip.
