@@ -1,5 +1,6 @@
-Here documents and here strings
-## 1 Thực thi lệnh với tài liệu tại đây
+Here documents, here strings and quoting
+# Phần 1 Here documents and here strings
+## 1.1 Thực thi lệnh với Here documents
 ```
 ssh -p 22 root@192.168.10.6 <<EOF
  echo 'printing pwd'
@@ -66,12 +67,12 @@ apple
 orange
 lemon
 ```
-Here-document là các dòng giữa `<< EOF` và EOF
+Here-document là các dòng giữa `<< EOF` và `EOF`
 
 Here-document ở đây trở thành đầu vào và sử dụng chuyển hướng đầu ra `>` đến tệp `fruit.txt`. Nếu `fruit.txt` không tồn tại, nó sẽ được tạo. Nếu nó tồn tại, nó sẽ bị loại bỏ và thêm here-document. Còn nếu nối tiếp vào file hiện có sử dụng chuyển hướng đầu vào `>>`.
 
 ## 1.4 Here string
-Bạn có thể cung cấp lệnh bằng các sử dụng here strings như thế này:
+Bạn có thể cung cấp lệnh bằng các sử dụng **here strings** như thế này:
 ```
 [root@hd ~]#  awk '{print $2}' <<< "hello world - how are you?"
 world
@@ -87,10 +88,11 @@ One two three four"
 you
 four
 ```
+Lệnh trên dùng để in ra các chuỗi ở vị trí trị định nhất định.
 ## 1.5 Limit strings
 Heredoc sử dụng một chuỗi giới hạn để xác định thời điểm ngừng sử dụng đầu vào. Chuỗi giới hạn kết thúc phải có điều kiện sau:
 * Ở đầu dòng
-* Là văn bản duy nhất trên dòng. Lưu ý: nếu bạn sử dụng <<- Limitstring có thể được bắt đầu bằng tabs \t
+* Là văn bản duy nhất trên dòng. Lưu ý: nếu bạn sử dụng `<<- Limitstring` có thể được bắt đầu bằng tabs \t
 
 ```
 cat <<limitstring
@@ -113,9 +115,9 @@ line 1
 line 2
  limitstring
 ```
-limitstring không đứng ở đầu dòng, nên shell sẽ tiếp tục đợi nhập thêm, đợi cho đến khi limitstring xuất hiện ở đầu dòng thì lệnh `cat` mới thực hiện
-# Quoting
-2.1  Dấu ngoặc kép cho biến và lệnh thay thế
+`limitstring` không đứng ở đầu dòng, nên shell sẽ tiếp tục đợi nhập thêm, đợi cho đến khi limitstring xuất hiện ở đầu dòng thì lệnh `cat` mới thực hiện
+# Phần 2 Quoting
+## 2.1  Dấu ngoặc kép cho biến và lệnh thay thế
 Các phép thay thế biến chỉ nên được sử dụng bên trong dấu ngoặc kép.
 ```
 [root@hd ~]# calculation='2 * 3'
@@ -130,9 +132,9 @@ Các phép thay thế biến chỉ nên được sử dụng bên trong dấu ng
 6
 ```
 
-Bên ngoài dấu ngoặc kép, $var nhận giá trị của var, chia nó thành các phần được phân tách bằng khoảng trắng và diễn giải mỗi phần dưới dạng một ký tự đại diện. Trừ khi bạn muốn hành vi này, hãy luôn đặt $var bên trong dấu ngoặc kép:"$var".
+Bên ngoài dấu ngoặc kép, **$var** nhận giá trị của var, chia nó thành các phần được phân tách bằng khoảng trắng và diễn giải mỗi phần dưới dạng một ký tự đại diện. Trừ khi bạn muốn hành vi này, hãy luôn đặt **$var** bên trong dấu ngoặc kép: `"$var"`.
 
-Điều tương tự cũng áp dụng cho các thay thế lệnh:"$(mycommand)" là đầu ra của `mycommand`.
+Điều tương tự cũng áp dụng cho các thay thế lệnh: `"$(mycommand)"` là đầu ra của `mycommand`.
 ```
 [root@hd ~]# echo "$(pwd)"
 /root
@@ -148,16 +150,16 @@ formatted text: a + b = 0008
 ```
 
 ## 2.2 Sự khác biệt giữa dấu ngoặc kép và dấu ngoặc đơn.
-|Dấu ngoặc kép- `"`|Dấu ngoặc đơn- `'`|
+|Dấu ngoặc kép- `""`|Dấu ngoặc đơn- `''`|
 |-|-|
 |Cho phép mở rộng biến|Ngăn chặn mở rộng biến|
 |Cho phép mở rộng lịch sử nếu được bật|Ngăn mở rộng lịch sử|
 |Cho phép thay thế lệnh|Ngăn chặn thay thế lệnh|
-|* và @ có thể có nghĩa đặc biệt|* và @ luôn là chính nó|
+|`*` và `@`có thể có nghĩa đặc biệt|`*` và `@` luôn là chính nó|
 |Có thể chứa ngoặc đơn hoặc ngoặc kép|Không cho phép ngoặc đơn bên trong ngoặc đơn|
-|$,`,",\ có thể thoát bằng \ để ngăn ý nghĩa đặc biệt của chúng|Tất cả đều là chữ|
+|`$`,`,",\ có thể thoát bằng `\` để ngăn ý nghĩa đặc biệt của chúng|Tất cả đều là chữ|
 
-Thuộc tính chung cho cả hai:
+Thuộc tính chung cho cả hai:    
 * Ngăn chăn hiện tượng globbing
 * Ngăn tách từ
 
@@ -216,7 +218,7 @@ Form feed: [
 Line
 break
 ```
-## Trích dẫn văn bản theo đúng nghĩa gốc.
+## 2.4 Trích dẫn văn bản theo đúng nghĩa gốc.
 Tất cả các ký tự đặc biệt được hiển thị dưới dòng sau:
 ```
 !"#$&'()*;<=>? @[\]^`{|}~
