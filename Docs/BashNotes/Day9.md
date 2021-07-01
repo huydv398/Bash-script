@@ -152,14 +152,14 @@ find -type f -size 12288c
 find -type f -size 24b
 find -type f -size 24
 ```
-* `find [options] -size n[cwbkMG]`
-    * Tìm tệp có kích thước n-block, trong đó +n có nghĩa là nhiều hơn n-block, -n có nghĩa là nhỏ hơn n-block và n là có nghĩa là chính xác
-        1. c: byte
-        2. w: 2bytes
-        3. b: 512 bytes
-        4. k: 1KB
-        5. M: 1MB
-        6. G: 1 GB
+`find [options] -size n[cwbkMG]`
+* Tìm tệp có kích thước n-block, trong đó +n có nghĩa là nhiều hơn n-block, -n có nghĩa là nhỏ hơn n-block và n là có nghĩa là chính xác
+1. c: byte
+2. w: 2bytes
+3. b: 512 bytes
+4. k: 1KB
+5. M: 1MB
+6. G: 1 GB
 ### Tìm kiếm theo đường dẫn
 Tham số `-path` cho phép chỉ định một mẫu để khớp với đường dẫn của kết quả. Mẫu cũng có thể phù hợp với tên của chính nó.
 
