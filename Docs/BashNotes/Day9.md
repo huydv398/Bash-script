@@ -1,4 +1,4 @@
-Copying(cp) & find
+Copying(cp), find, sort, sourcing(env)
 ## 1 copying
 |Character|option|Description|
 |-|-|-|
@@ -274,3 +274,12 @@ Khi phát triển một số ứng dụng trên máy, việc tách các phần p
 
 Với việc sử dụng virtualenv, các môi trường được lấy nguồn từ shell của bạn để khi bạn chạy một lệnh, nó đến từ môi trường ảo đó. Điều này được cài đặt phổ biến nhất bằng cách sử dụng pip.
 
+```
+
+yum install python-pip -y
+pip install virtualenv
+mkdir /opt/evn_1
+cd /opt/evn_1
+virtualenv env -p python2
+source env/bin/activate
+```
