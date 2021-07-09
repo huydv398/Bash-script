@@ -23,7 +23,7 @@
 1. [Day11 - Conditional Expressions (Biểu thức có điều kiện)](Docs/BashNotes/Day11.md)
 1. [Day12 - Viết kịch bản với các tham số](Docs/BashNotes/Day12.md)
 1. [Day13 - Thay thế lịch sử Bash](Docs/BashNotes/Day13.md)
-1. [Day-](Docs/BashNotes/Day14.md)
+1. [Day14 - Toán học và Số học Bash](Docs/BashNotes/Day14.md)
 1. [Day-](Docs/BashNotes/Day15.md)
 1. [Day-](Docs/BashNotes/Day16.md)
 1. [Day-](Docs/BashNotes/Day17.md)
