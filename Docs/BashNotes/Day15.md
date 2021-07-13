@@ -28,3 +28,12 @@ else
  PS1='[$(timeNow)] \u@\h \w$(gitPS1) :/$ '
 fi
 ```
+
+Chú ý:
+* Thực hiện các thay đổi trong tệp `~/.bashrc` hoặc `/etc/bashrc` hoặc `~/.bash_profile` hoặc `~./profile` (tùy thuộc vào OS) và lưu lại.
+* Đối với `root`, bạn cũng có thể cần chỉnh sửa tệp `/etc/bash.bashrc` hoặc `/root/.bashrc` 
+* Chạy `source ~/.bashrc` (bản phân phối cụ thể) sau khi lưu tệp.
+* Lưu ý: nếu bạn đã lưu các thay đổi trong `~/.bashrc`, thì hãy thêm `soucre ~/.bashrc` để thay đổi trong PS1 sẽ được ghi lại mỗi khi ứng dụng terminal khởi động.
+
+## 1.2 Hiển thị tên git branch trong dấu nhắc đầu cuối.
+Bạn có thể có các hàm trong biến PS1, chỉ cần đảm bảo chích dẫn duy nhất nó hoặc sử dụng thoát cho các ký tự đặc biệt:
