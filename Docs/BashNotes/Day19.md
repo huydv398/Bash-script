@@ -8,8 +8,7 @@
 
 ## 1.1 Lặp qua từng dòng với một tệp
 ```
-while IFS=; read -r line1; do
- echo "$line1"
-done <file1
-
+while IFS= read -r line; do
+ echo "$line"
+done <file
 ```

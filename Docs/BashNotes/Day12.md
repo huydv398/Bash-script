@@ -248,3 +248,4 @@ Output
 6 dụng
 7 tốt.
 ```
+Thanks and best regards

@@ -55,3 +55,15 @@ mkdir backup_data && cd backup_data
 [root@hd backup_data]# 
 ```
 Điều này sẽ thay thế đối số n của lệnh hiện tại. Trong ví dụ `!#:1` được thay thế bằng đối số đầu tiên, tức là **backup_data**
+## 1.5 Lặp lại lệnh trước đó với một lệnh thay thế
+```
+[root@hd fol]# cat file1.txt 
+[root@hd fol]# ^1^2^
+cat file2.txt 
+
+[root@hd fol]# cat file1.txt 
+[root@hd fol]# ^1^3^
+cat file3.txt 
+```
+Lệnh này sẽ thay thế 1 bằng 2 trong lệnh đã thực hiện trước đó. Nó sẽ chỉ thay thế lần xuất hiện đầu tiên của chuỗi và tương đương với `!!:s/1/2/`
+Thanks and best regards

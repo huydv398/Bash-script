@@ -39,8 +39,3 @@ Ngoài ra, bạn có thể chỉ định số byte tối đa thay vì đầu dò
 ```
 split --lines=5000 file
 ```
-#  Pipelines
-## 3.1 Sử dụng |&
-|&  kết nối đầu ra tiêu chuẩn và lỗi tiêu chuẩn của lệnh đầu tiên với lệnh thứ hai trong khi | chỉ kết nói đầu ra tiêu chuẩn của lệnh đầu tiên dến lệnh thứ 2.
-
-Trong ví dụ này, trang được tải xuống qua curl. Với tùy chọn curl -v viết một số thông tin trên stderr bao gồm, trang tải xuống được viết lên stdout/ 

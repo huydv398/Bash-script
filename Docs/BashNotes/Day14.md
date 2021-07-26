@@ -59,7 +59,5 @@ Một khía canh chính của thay thế quy trình là có cho phép chúng ta 
 ./file.txt
 ./check.conf
 ```
-Nếu tôi chuyển một vòng lặp read/write làm tăng bộ đếm như sau:
-```
 
-```
+Thanks and best regards

@@ -1,6 +1,6 @@
 Conditional Expressions (Biểu thức có điều kiện)
 # Conditional Expressions
-## 2.1 Kiểm tra tệp
+## 1.1 Kiểm tra tệp
 Toán tử điều kiện `-e` kiểm tra xem tệp có tồn tại hay không(bao gồm tất cả các loại tệp thư mục, ...).
 ```
 [root@hd ~]# filename=text
@@ -248,3 +248,4 @@ if [[ 9 > 10 ]]; then
  echo "9 là sau 10 theo thứ tự từ vựng"
 fi
 ```
+Thanks and best regards

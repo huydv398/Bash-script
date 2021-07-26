@@ -240,3 +240,4 @@ So sánh lại chuỗi ký tự sau khi in ra, 4 ký tự `'\''` cho phép cắt
 '!"#$&'	\''	()*;<=>? @[\]^`{|}~'
  !"#$&'		()*;<=>? @[\]^`{|}~
 ```
+Thanks and best regards

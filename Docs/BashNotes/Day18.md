@@ -1,4 +1,4 @@
-Các biến bên trong 
+Các biến bên trong bash 
 Tổng quan về các biến nội bộ của bash, ở đâu như thế nào và khi nào cần sử dụng chúng.
 ## Tóm tắt các biens nội bộ
 |Variable|Chi tiết|
@@ -428,11 +428,4 @@ Biến chỉ đọc lưu trữ số ID của người dùng, Câu lệnh đượ
 [hdc@hd root]$ echo $UID
 1002
 ```
-## 1.
-## 1.
-## 1.
-## 1.
-## 1.
-## 1.
-## 1.
-## 1.
+Thanks and best regards

@@ -283,3 +283,5 @@ cd /opt/evn_1
 virtualenv env -p python2
 source env/bin/activate
 ```
+
+Thanks and best regards

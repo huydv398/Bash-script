@@ -37,3 +37,4 @@ Chú ý:
 
 ## 1.2 Hiển thị tên git branch trong dấu nhắc đầu cuối.
 Bạn có thể có các hàm trong biến PS1, chỉ cần đảm bảo chích dẫn duy nhất nó hoặc sử dụng thoát cho các ký tự đặc biệt:
+Thanks and best regards
