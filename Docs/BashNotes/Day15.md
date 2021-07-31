@@ -87,6 +87,8 @@ PS1="\$GIT_STATUS \u@\h:\w\$ "
 ```
 Nếu chúng ra đang ở trong một thư mục bên trong kho lưu trữ git, điều này sẽ xuất ra:
 >branch user@machine:~$
+
+
 Nếu chúng ra đang ở trong một thư mục bình thường:
 >user@machine:~$
 ## 5 Thay đổi PS1 prompt
