@@ -152,6 +152,6 @@ PS1+="\e[0;33m\u@\h\e[0m:\e[1;34m\w\e[0m \n$ "
 export PS1
 ```
 
-![image]./(image/Screenshot_3.png)
+![image](./image/Screenshot_3.png)
 
 Thanks and best regards
