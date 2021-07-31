@@ -1,7 +1,5 @@
 * Jobs at specific times
 * Handling the system prompt
-* The cut command
-* Bash on Windows 10
 * Cut Command
 * global and local variables
 
@@ -144,3 +142,115 @@ root@hd:~/fol/dir > pwd
 |--output-delimiter|Chỉ định khi nào nó phải khác với dấu phân cách đầu vào|
 
 Lệnh `cut` là một cách nhanh chóng để trích xuất các phần của dòng tệp văn bản. Nó thuộc về các lệnh Unix lâu đời nhất. Các triển khai phổ biến nhất của nó là phiên bản GNU được tìm thấy trên Linux và phiên bản FreeBSD trên MacOS, nhưng mỗi phiên bản Unix đều có đặc điểm riêng. Xem bên dưới để biết sự khác biệt. Các dòng đầu được đọc từ stdin hoặc từ các tệp được liệt kê dưới dạng đối số trên dòng lệnh.
+### 3.1 Chỉ một ký tự phân cách
+Bạn không thể có nhiều hơn một ký tự phân tách: nếu bạn chỉ định một cái gì đó như `-d ":;,"`, một số triển khai sẽ chỉ sử dụng ký tự đầu tiên làm dấu phân tách (trong trường hợp này sẽ là dấu phẩy),
+```
+# cut -d ",;:" -f2 <<<"Nguyễn Vân A, Cầu Giấy, Hà Nội, SĐT:0987654321; job:IT"
+cut: the delimiter must be a single character
+Try 'cut --help' for more information.
+```
+### 3.2 Dấu phân cách lặp lại là một trường trống.
+```
+# cut -d, -f1,3 <<<"a,,b,c,d,e"
+a,b
+```
+Khá rõ ràng, nhưng với các chuỗi được phân tách bằng dấu cach, nó có thể ít rõ rằng hơn:
+```
+# cut -d ' ' -f1,3 <<<"a  b c d e"
+a b
+
+```
+cut không thủ được sử dụng để phân tích cú pháp các đối số như shell và và chương trình khác
+### 3.3 Không trích dẫn
+Không có cách nào để bảo vệ dấu phân cách. Bảng tính và phần mềm sử lý CSV tương tự thường có thể nhận ra một ký tự trích dẫn văn bản, điều này giúp bạn có thể xác định các chuỗi có chứa dấu phân cách. Với `cut` bạn không thể.
+```
+# cut -d, -f3 <<<'name,Smith,"1, Co Street"'
+"1
+```
+### 3.4 Trích xuất, không thao tác
+Bạn chỉ có thể trích xuất các phần của dòng, không thể sắp xếp lại hoặc lặp lại các trường.
+```
+[root@hd ~]# cut -d, -f2,1 <<<'Duong,Huy,VN'
+Duong,Huy
+[root@hd ~]# cut -d, -f2,2 <<<'Duong,Huy,VN'
+Huy
+```
+### 3.5 Hiện thị cột đầu tiên của file
+Giả sử bạn có tệp nội dung như sau:
+```
+Now call function 
+First Name
+Last Name
+```
+
+Tệp này có 3 cột được phân tách bằng dấu cách. Để chỉ lấy cột đầu tiên, hãy làm như sau.
+```
+cut -d ' ' -f1 filename
+```
+
+Flag -d, chỉ định dấu cách hoặc cái gì ngăn cách các bản ghi. flag -f chỉ định số trường hoặc số cột. Output
+```
+# cut -d ' ' -f1 filename 
+Now
+First
+Last
+```
+
+### 3.6 Hiển thị các cột từ x đến y của một tệp
+Đôi khi rất hữu ích khi hiển thị một loại các cột trong một tệp. Giả sử bạn có tệp này:
+```
+Hà Nội, Cầu Giấy, Trung Hòa, 2021, red
+Hà Nội, Cầu Giấy, Dịch Vọng, 2000, red
+Vĩnh Phúc, Phúc Yên, Phúc Thắng, 1993, green
+
+```
+Thực hiện lấy 3 cột đầu tiên ngăn cách nhau bằng dấu phẩy:
+```
+# cut -d ',' -f1-3 filename 
+Hà Nội, Cầu Giấy, Trung Hòa
+Hà Nội, Cầu Giấy, Dịch Vọng
+Vĩnh Phúc, Phúc Yên, Phúc Thắng
+```
+## 4 global and local variables
+Theo mặc định, mọi biến trong bash là global- biến toàn cục đối với mọi hàm, tập lệnh và thậm chí cả bên ngoài nếu bạn đang khai báo các biến của bạn bên trong một tệp lệnh.
+
+Nếu bạn muốn biến của mình là biến cục bộ cho một hàm, bạn có thể sử dụng `local` để biến đó trở thành một biến mới độc lập với phạm vi toàn cục và giá trị của nó sẽ chỉ có thể truy cập được bên trong hàm đó.
+## 4.1 Global variables
+```
+var="hello"
+function foo(){
+    echo $var
+}
+foo
+```
+Sẽ xuất ra `"hello"`, nhưng điều này cũng hoạt động theo cách khác:
+```
+function foo() {
+    var="hello"
+}
+foo
+echo $var
+```
+Cũng sẽ xuất ra `hello`
+
+### 4.2 Local variables
+```
+function foo() {
+    local var
+    var="hello"
+}
+foo
+echo $var
+```
+Sẽ không xuất ra gì, vì var là một biến local của hàm foo và giá trị của nó không được nhìn thấy từ bên ngoài.
+
+### 4.3 Trộn cả hai với nhau.
+```
+var="hello"
+function foo(){
+    local var="sup?"
+    echo "inside function, var=$var"
+}
+foo
+echo "outside function, var=$var"
+```

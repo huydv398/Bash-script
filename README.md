@@ -34,12 +34,8 @@
 1. [Day22 - ](Docs/BashNotes/Day22.md)
 1. [Day23 - ](Docs/BashNotes/Day23.md)
 1. [Day24 - ](Docs/BashNotes/Day24.md)
-1. [Day-](Docs/BashNotes/Day25.md)
-1. [Day-](Docs/BashNotes/Day26.md)
-1. [Day-](Docs/BashNotes/Day27.md)
-1. [Day-](Docs/BashNotes/Day28.md)
-1. [Day-](Docs/BashNotes/Day29.md)
-1. [Day-](Docs/BashNotes/Day30.md)
+1. [Day25 -](Docs/BashNotes/Day25.md)
+
 ## bash script
 1. [script install wordpress in centos7](Docs/script/wp-c7.sh)
 1. [Gửi thông điệp về mail và telegram](Docs/script/sendmessage.md)
