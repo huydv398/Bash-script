@@ -85,7 +85,71 @@ function prompt_command {
 PROMPT_COMMAND=prompt_command
 PS1="\$GIT_STATUS \u@\h:\w\$ "
 ```
-Nếu chúng ra đang ở trong một thư mục bình thường:
+Nếu chúng ra đang ở trong một thư mục bên trong kho lưu trữ git, điều này sẽ xuất ra:
 >branch user@machine:~$
+Nếu chúng ra đang ở trong một thư mục bình thường:
+>user@machine:~$
+## 5 Thay đổi PS1 prompt
+Để thay đổi PS1, bạn chỉ cần thay đổi giá trị của biến shell PS1. Giá trị có thể được đặt trong tệp ~/.bashrc hoặc /etc/bashrc, tùy thuộc vào từng bản distro. PS1 có thể được thay đổi thành bất kỳ văn bản thuần túy nào.
+
+```
+PS1="hello "
+```
+Bên cạnh văn bản thuần túy, một số ký tự đặc biệt thoát ra sau dấu gạch chéo ngược được hỗ trợ:
+
+|Định dạng|Hành động|
+|-|-|
+|\a|Ký tự chuông ASCII|
+|\d|Ngày ở định dạng "Thứ ngày tháng"(thứ 6 ngày 31 tháng 2)|
+|\D{format}|Định dạng được chuyển tới strftime(3) và kết quả được chèn vào chuỗi dấu nhắc ';' định dạng trống dẫn đến biểu diễn thời gian theo ngôn ngữ cụ thể|
+|\e|một ký tự thoát|
+|\h|hostname tối đa là dấu '.' đầu tiên|
+|\H|hostname|
+|\j|Số lượng jobs được quản lý bởi shell|
+|\l|tên cơ sở của thiết bị đầu cuối shell\|
+|\n|dòng mới|
+|\r|xuống dòng|
+|\s|shell|
+|\t|time HH:MM:SS 24 giờ|
+|\T|time HH:MM:SS 12 giờ|
+|\@|12 giờ am/pm|
+|\A|HH:MM 24 giờ|
+|\u|user hiện tại|
+|\v|version bash|
+|\V|phát hành cấp đọ bahs, viersion + bản vá |
+|\w|Thư mục làm việc hiện tại|
+|\W|Tên cơ sở của thư mục làm việc hiện tại với $HOME được viết thành ~|
+|\!|Số lịch sử lệnh|
+|\#|Số lệnh của lệnh|
+|\$|nếu UID hiệu dụng là 0, a #, nếu không thì là $|
+
+Vì vậy, ví dụ, chúng ta có thể đặt PS1 thành:
+```
+PS1="\u@\h:\w\$ "
+```
+## 6 Hiển thị trạng thái và thời gian trả lại lệnh trước đó
+Đôi khi chúng ta cần một gợi ý trực quan để chỉ ra trạng thái trả về của lệnh trước đó.
+```
+# -ANSI-COLOR-CODES- #
+Color_Off="\033[0m"
+###-Regular-###
+Red="\033[0;31m"
+Green="\033[0;32m"
+Yellow="\033[0;33m"
+####-Bold-####
+function __stat() {
+    if [ $? -eq 0 ]; then
+        echo -en "$Green ✔ $Color_Off "
+    else
+        echo -en "$Red ✘ $Color_Off "
+    fi
+}
+PS1='$(__stat)'
+PS1+="[\t] "
+PS1+="\e[0;33m\u@\h\e[0m:\e[1;34m\w\e[0m \n$ "
+export PS1
+```
+
+![image](image/Screenshot_3.png)
 
 Thanks and best regards
