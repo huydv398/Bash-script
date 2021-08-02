@@ -1,5 +1,4 @@
 * Jobs at specific times
-* Handling the system prompt
 * Cut Command
 * global and local variables
 
@@ -61,74 +60,48 @@ Description=my very first systemd timer
 OnCalendar=*-*-* *:01:00
 # Cái này chạy mỗi giờ ở 1 phút 0 giây e.g. 13:01:00
 ```
-## 2 Xử lý lời nhắc hệ thống
-|Ký tự thoát|Chi tiết|
-|-|-|
-|\a|Một ký tự bell|
-|\d|Date-ngày, ở định dạng "Ngày trong tuần, ngày trong tháng" (ví dụ: "Thứ ba ngày 26 tháng 5")|
-|\D|Định dạng được chuyển tới strftime(3) và kết quả được chèn vào chuỗi dấu nhắc; trống rỗng. FORMAT dẫn đến biểu diễn thời gian theo ngôn ngữ cụ thể|
-|\e|Một ký tự thoát.|
-|\h|hostname|
-|\H||
-|\j|Số lượng công việc hiện được quản lý bởi trình bao|
-|\l|Tên cơ sở của tên thiết bị đầu cuối của shell|
-|\n|Một dòng mới|
-|\r|Một dấu xuống dòng|
-|\s|Tên của shell,|
-|\t|Thời gian, ở định dạng HH:MM:SS trong 24 giờ|
-|\T|Thời gian, ở định dạng HH:MM:SS trong 12 giờ|
-|@|Giờ, ở định dạng 12 giờ sáng / chiều.|
-|\A|Giờ, ở định dạng HH: MM 24 giờ.|
-|\u|username-Tên người dùng của người dùng hiện tại|
-|\v|Phiên bản của Bash|
-|\V|Việc phát hành Bash, phiên bản + patchlevel|
-|\w|Thư mục làm việc hiện tại, với $ HOME được viết tắt bằng dấu ngã|
-|\W|Tên cơ sở của $ PWD, với $ HOME được viết tắt bằng dấu ngã|
-|!|Số lịch sử của lệnh này|
-|#|Số lệnh của lệnh này|
-|$|Nếu uid hiệu dụng là 0, #, nếu không thì $|
-|\NNN|Ký tự có mã ASCII là giá trị bát phân NNN|
-|\|Dấu gạch chéo ngược|
-|\[|Bắt đầu một chuỗi các ký tự không in được. Điều này có thể được sử dụng để nhúng chuỗi điều khiển đầu cuối vào dấu nhắc.|
-|\]|Kết thúc một chuỗi các ký tự không in được.|
+## 2 Global and local variables
+Theo mặc định, mọi biến trong bash là global- biến toàn cục đối với mọi hàm, tập lệnh và thậm chí cả bên ngoài nếu bạn đang khai báo các biến của bạn bên trong một tệp lệnh.
 
-### 2.1 Sử dụng biến môi trường  PROMPT_COMMAND
-Khi lệnh cuối cùng trong một interactive bash instance được thực hiện, biến PS1 được đánh giá sẽ hiển thị. Trước khi thực hiện, biến PS1 được đánh giá sẽ hiển thị. Trước khi thực sự hiển thị, hãy xem liệu PROMPT_COMMAND có được đặt hay không. Giá trị của vả này phải là một chương trình hoặc tệp lệnh có thể gọi được. Nếu biến này được đặt, chương trình/script này được gọi trước khi lời nhắc PS1 được hiển thị.
+Nếu bạn muốn biến của mình là biến cục bộ cho một hàm, bạn có thể sử dụng `local` để biến đó trở thành một biến mới độc lập với phạm vi toàn cục và giá trị của nó sẽ chỉ có thể truy cập được bên trong hàm đó.
+## 2.1 Global variables
 ```
+var="hello"
+function foo(){
+    echo $var
+}
+foo
+```
+Sẽ xuất ra `"hello"`, nhưng điều này cũng hoạt động theo cách khác:
+```
+function foo() {
+    var="hello"
+}
+foo
+echo $var
+```
+Cũng sẽ xuất ra `hello`
 
+### 2.2 Local variables
 ```
-### 2.2 Sử dụng PS1
-PS1 là dấu nhắc hệ thống bình thường chỉ ra rằng bash đợi các lệnh được nhập vào. Nó hiểu một số trình tự thoát và có thể thực thi các chức năng proxy. Vì bash phải định vị con trỏ sau lời nhắc hiển thị, nó cần biết cách tính độ dài hiệu dụng của chuỗi dấu nhắc. Để chỉ ra chuỗi ký tự không in trong ngoặc nhọn thoát biến PS1 được sử dụng: `\[` chuỗi ký tự không in `\]`. Tất cả những gì đang nói đều đúng với tất cả các biến PS*
+function foo() {
+    local var
+    var="hello"
+}
+foo
+echo $var
+```
+Sẽ không xuất ra gì, vì var là một biến local của hàm foo và giá trị của nó không được nhìn thấy từ bên ngoài.
 
+### 2.3 Trộn cả hai với nhau.
 ```
-#mọi thứ không phải là một chuỗi thoát sẽ được in theo ký tự
-export PS1="String " # lời nhăc bây giờ là:
-String ▉
-
-```
-Output:
-```
-[root@hd ~]# export PS1="chuỗi chữ muốn đặt "
-chuỗi chữ muốn đặt ls
-anaconda-ks.cfg  file.sh  helloname.sh   results-of-ifconfig.txt
-file1.sh         fol      install-wp.sh  text
-chuỗi chữ muốn đặt pwd
-/root
-chuỗi chữ muốn đặt date
-Thu Jul 22 16:34:50 EDT 2021
-```
-
-```
-# \u == user \h == host \w == Thư mục làm việc thực tế
-# lưu ý các dấu ngoặc kép tránh diễn giải bằng shell
-export PS1='\u@\h:\w > ' # \u == user, \h == host, \w thư mục làm việc dir
-
-#output:
-[root@hd ~]# export PS1='\u@\h:\w > '
-root@hd:~ > pwd
-/root
-root@hd:~/fol/dir > pwd
-/root/fol/dir
+var="hello"
+function foo(){
+    local var="sup?"
+    echo "inside function, var=$var"
+}
+foo
+echo "outside function, var=$var"
 ```
 ## 3 The cut command
 
@@ -210,47 +183,4 @@ Thực hiện lấy 3 cột đầu tiên ngăn cách nhau bằng dấu phẩy:
 Hà Nội, Cầu Giấy, Trung Hòa
 Hà Nội, Cầu Giấy, Dịch Vọng
 Vĩnh Phúc, Phúc Yên, Phúc Thắng
-```
-## 4 global and local variables
-Theo mặc định, mọi biến trong bash là global- biến toàn cục đối với mọi hàm, tập lệnh và thậm chí cả bên ngoài nếu bạn đang khai báo các biến của bạn bên trong một tệp lệnh.
-
-Nếu bạn muốn biến của mình là biến cục bộ cho một hàm, bạn có thể sử dụng `local` để biến đó trở thành một biến mới độc lập với phạm vi toàn cục và giá trị của nó sẽ chỉ có thể truy cập được bên trong hàm đó.
-## 4.1 Global variables
-```
-var="hello"
-function foo(){
-    echo $var
-}
-foo
-```
-Sẽ xuất ra `"hello"`, nhưng điều này cũng hoạt động theo cách khác:
-```
-function foo() {
-    var="hello"
-}
-foo
-echo $var
-```
-Cũng sẽ xuất ra `hello`
-
-### 4.2 Local variables
-```
-function foo() {
-    local var
-    var="hello"
-}
-foo
-echo $var
-```
-Sẽ không xuất ra gì, vì var là một biến local của hàm foo và giá trị của nó không được nhìn thấy từ bên ngoài.
-
-### 4.3 Trộn cả hai với nhau.
-```
-var="hello"
-function foo(){
-    local var="sup?"
-    echo "inside function, var=$var"
-}
-foo
-echo "outside function, var=$var"
 ```

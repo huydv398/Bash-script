@@ -30,7 +30,7 @@
 1. [Day18 - Các biến bên trong bash ](Docs/BashNotes/Day18.md)
 1. [Day19 - Đọc tệp(Luồng dữ liệu, biến) từng dòng(và/hoặc từng trường)](Docs/BashNotes/Day19.md)
 1. [Day20 - Trình thực thi tệp](Docs/BashNotes/Day20.md)
-1. [Day21 - ](Docs/BashNotes/Day21.md)
+1. [Day21 - Tách từ](Docs/BashNotes/Day21.md)
 1. [Day22 - ](Docs/BashNotes/Day22.md)
 1. [Day23 - ](Docs/BashNotes/Day23.md)
 1. [Day24 - ](Docs/BashNotes/Day24.md)
