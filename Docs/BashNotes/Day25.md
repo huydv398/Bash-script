@@ -1,9 +1,8 @@
 * Networking With Bash
 * Parallel
-* Decoding URL
 * Design Patterns
 * Pitfalls
-* Keyboard shortcuts
+
 
 
 ## 1 Networking With Bash
