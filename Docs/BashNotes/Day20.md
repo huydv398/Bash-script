@@ -1,4 +1,5 @@
 Trình thực thi tệp và tách tệp
+
 .bash_profile, .bash_login, .bashrc, and .profile Đều làm khá giống nhau: thiết lập và xác định các hàm, biến và các loại
 
 Sự khác biệt chính là .bashrc được gọi khi mở một của sổ không đăng nhập nhưng tương tác, .bash_profile và những cái khác được gọi cho một trình shell đăng nhập. Nhiều người có .bash_profile của họ hoặc các gọi tương tự .bashrc
