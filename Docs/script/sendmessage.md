@@ -12,6 +12,11 @@ yum install wget -y
 wget https://raw.githubusercontent.com/huydv398/Bash-script/master/Docs/script/install-ssmtp.sh && chmod +x install-ssmtp.sh 
 ./install-ssmtp.sh
 ```
+
+Nếu muốn thực hiện thay đổi thông tin gmail thực hiện lệnh và nhập lại thông tin gmail:
+```
+./install-ssmtp.sh -e
+```
 ### Cài đặt SSMTP thủ công
 * Trên Ubuntu, Update repo, cài đặt dịch vụ SSMTP và cài đặt các gói hỗ trợ:
 ```
