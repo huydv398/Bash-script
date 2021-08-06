@@ -8,7 +8,7 @@ Yêu cầu:
 ### Cài đặt cấu hình tự động
 Thực hiện lệnh:
 ```
-curl https://raw.githubusercontent.com/huydv398/Bash-script/master/Docs/script/install-ssmtp.sh | bash 
+wget https://raw.githubusercontent.com/huydv398/Bash-script/master/Docs/script/install-ssmtp.sh && chmod +x install-ssmtp.sh && ./install-ssmtp.sh
 ```
 ### Cài đặt SSMTP thủ công
 * Trên Ubuntu, Update repo, cài đặt dịch vụ SSMTP và cài đặt các gói hỗ trợ:
