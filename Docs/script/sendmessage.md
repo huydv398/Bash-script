@@ -1,11 +1,16 @@
-# Send message to Gmail & Telegram.
+# Send message to Gmail
 
-## Email
+## Cài đặt & Cấu hình SSMTP 
 Yêu cầu:
 * Sử dụng quyền root
 * Sử dụng SMTP để gửi mail cảnh báo
 * Cần biết được các thông điệp muốn gửi
-### Cài đặt SSMTP
+### Cài đặt cấu hình tự động
+Thực hiện lệnh:
+```
+curl https://raw.githubusercontent.com/huydv398/Bash-script/master/Docs/script/install-ssmtp.sh | bash 
+```
+### Cài đặt SSMTP thủ công
 * Trên Ubuntu, Update repo, cài đặt dịch vụ SSMTP và cài đặt các gói hỗ trợ:
 ```
 apt-get update
@@ -107,7 +112,3 @@ Thêm chủ đề cho mail:
 } | ssmtp To.Email@mail.com
 ```
 
-## Telegram
-Yêu cầu:
-* Tạo bot.
-* Lấy được token API
