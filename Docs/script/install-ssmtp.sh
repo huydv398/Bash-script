@@ -59,6 +59,7 @@ main(){
         echo "Install thành công SSMTP."
     fi
 }
+main
 f_conf_ssmtp_e(){
     cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp-"`date +"%d%m%Y%H%M"`".conf.bak
     f_conf_ssmtp
