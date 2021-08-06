@@ -9,7 +9,6 @@ then
     echo "SSMTP is installed" 
 else
     sta=0
-    
 fi
 # install_mariadb
 f_install_ssmtp(){
@@ -65,7 +64,6 @@ TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt
 }
 main(){
     set -e
-    f_in_info_main
     f_install_ssmtp
     if [ "$sta" == "0" ]
     then
