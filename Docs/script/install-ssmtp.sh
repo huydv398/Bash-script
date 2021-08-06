@@ -27,16 +27,12 @@ f_install_ssmtp(){
         else
             echo "OS none supported"
         fi
-        sleep 5
     fi
     
 }
 f_conf_ssmtp(){
     cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp-q.conf.bak
-    read -p "SMTP server:(Enter for: smtp.gmail.com): " smtpserver
-    read -p "SMTP Username (Ex: user@gmail.com): " smtpuser
-    read -p "SMTP Password (password for $smtpuser): " smtppassword
-    read -p "SMTP port:(Enter for: 587): " smtpport
+
     if [ $smtpserver="" ]
     then 
         smtpserver=smtp.gmail.com
@@ -64,8 +60,15 @@ TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt
     sleep 5
     
 }
+f_in_info_main(){
+    read -p "SMTP server:(Enter for: smtp.gmail.com): " smtpserver
+    read -p "SMTP Username (Ex: user@gmail.com): " smtpuser
+    read -p "SMTP Password (password for $smtpuser): " smtppassword
+    read -p "SMTP port:(Enter for: 587): " smtpport
+}
 main(){
     set -e
+    f_in_info_main
     f_install_ssmtp
     if [ "$sta" == "0" ]
     then
