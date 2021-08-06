@@ -119,3 +119,4 @@ Thêm chủ đề cho mail:
 } | ssmtp To.Email@mail.com
 ```
 
+Tài liệu tham khảo: https://news.cloud365.vn/cai-dat-va-cau-hinh-ssmtp-tren-linux/
