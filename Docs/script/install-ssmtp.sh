@@ -27,7 +27,6 @@ f_install_ssmtp(){
     else
         echo "OS none supported"
     fi
-    
 }
 f_conf_ssmtp(){
     cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.bak
@@ -44,16 +43,15 @@ f_conf_ssmtp(){
     then 
         smtpport=587
     fi 
-    echo "
-root=$smtpuser
-mailhub=smtp.gmail.com:587
-AuthUser=$smtpuser
-AuthPass=$smtppassword
-UseTLS=YES
-UseSTARTTLS=YES
-rewriteDomain=gmail.com
-FromLineOverride=YES
-TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt
+    echo "root=$smtpuser
+    mailhub=smtp.gmail.com:587
+    AuthUser=$smtpuser
+    AuthPass=$smtppassword
+    UseTLS=YES
+    UseSTARTTLS=YES
+    rewriteDomain=gmail.com
+    FromLineOverride=YES
+    TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt
     " > /etc/ssmtp/ssmtp.conf
 
     echo " 
