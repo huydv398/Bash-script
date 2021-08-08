@@ -12,6 +12,7 @@ ULR_Mess="https://api.telegram.org/bot$TOKEN/sendMessage"
 IP=$(hostname -I)
 # EMAIL 
 TO_MAIL='To_email_edit'
+# mpstat lấy info cpu
 if [ -e /usr/bin/mpstat ]
 then
     echo "Get Infomation ..."
@@ -46,7 +47,7 @@ DISK=$(df -h /)
 # Tạo thông tin Performance
 TEXT=$( echo -e "Thời gian: $DATE_EXEC\n\nInformation Host: $OS-$IP \n$INFO \n\nInfo RAM:\nMemory Total: $TOTAL MB \nMemory Used: $USED MB\nMemory Free: $FREE MB\n\nInfo CPU\nUser used: $CPU_USer %\nSystem used: $CPU_Kernel%\nKhông tải: $CPU_FREE%\n\nInfo Disk\n$DISK"  )
 
-# Gửi thông tin
+# Gửi thông tin về tele và gamil
 curl -s -X POST "$ULR_Mess" -d chat_id=$USER_ID -d text="$TEXT"> /dev/null
 
 {
