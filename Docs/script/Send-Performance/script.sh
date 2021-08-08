@@ -3,15 +3,15 @@
 cat /etc/os-release* |grep 'ubuntu' > /dev/null 2>&1 && OS='Ubuntu'
 cat /etc/os-release* |grep 'centos' > /dev/null 2>&1 && OS='CentOS' 
 # ID Telegram
-USER_ID="750878537"
+USER_ID="USER_ID_edit"
 #API Token
-TOKEN="1946692490:AAEC83YVs-B5zJk0PSp8xDUiM2sE-JzsBJU"
+TOKEN="TOKEN_edit"
 #URL send message API
 ULR_Mess="https://api.telegram.org/bot$TOKEN/sendMessage"
 # IP Address
 IP=$(hostname -I)
 # EMAIL 
-TO_MAIL='huydv398@gmail.com'
+TO_MAIL='To_email_edit'
 if [ -e /usr/bin/mpstat ]
 then
     echo "Get Infomation ..."
