@@ -16,6 +16,7 @@ Tải các gói cần thiết:
 yum update -y
 yum install -y curl wget 
 ```
+
 Thực hiện tải file cấu shell về máy:
 ```
 cd 
@@ -27,6 +28,8 @@ chmod +x script.sh
 Thực hiện thay đổi file cấu hình:
 ```
 vi script.sh
+```
+
 ```
 USER_ID="USER_ID_edit"
 TOKEN="TOKEN_edit"
