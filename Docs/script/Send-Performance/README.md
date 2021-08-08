@@ -37,7 +37,7 @@ TO_MAIL='To_email_edit'
 ```
 Thay đổi 3 dòng cấu hình trên tương ứng với thông tin cá nhân.
 
-Dùng cron tab lấy gửi thông tin về trong khoảng thời gian nhất đinh ở đây, tôi muốn cứ vào khoảng thời gian là 1:00, 2:00, 3:00 ..., 22:00, 23:00, 1 giờ; thì gửi thông tin về một lần.
+Dùng cron tab lấy gửi thông tin về trong khoảng thời gian nhất định ở đây, tôi muốn cứ vào khoảng thời gian là 1:00, 2:00, 3:00 ..., 22:00, 23:00, 1 giờ; thì gửi thông tin về một lần.
 
 Thực hiện lệnh:
 ```
