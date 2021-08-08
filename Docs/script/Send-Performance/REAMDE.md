@@ -20,5 +20,30 @@ Thực hiện tải file cấu shell về máy:
 ```
 cd 
 mkdir script && cd script
-wget 
+wget https://raw.githubusercontent.com/huydv398/Bash-script/master/Docs/script/Send-Performance/script.sh
+chmod +x script.sh
 ```
+
+Thực hiện thay đổi file cấu hình:
+```
+vi script.sh
+```
+USER_ID="USER_ID_edit"
+TOKEN="TOKEN_edit"
+TO_MAIL='To_email_edit'
+```
+Thay đổi 3 dòng cấu hình trên tương ứng với thông tin cá nhân.
+
+Dùng cron tab lấy gửi thông tin về trong khoảng thời gian nhất đinh ở đây, tôi muốn cứ vào khoảng thời gian là 1:00, 2:00, 3:00 ..., 22:00, 23:00, 1 giờ; thì gửi thông tin về một lần.
+
+Thực hiện lệnh:
+```
+crontab -e
+```
+
+Thêm dòng sau vào và lưu lại:
+```
+0 * * * * /root/script/script.sh
+```
+
+Chúc các bạn thành công.
