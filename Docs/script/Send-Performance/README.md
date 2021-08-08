@@ -48,5 +48,9 @@ Thêm dòng sau vào và lưu lại:
 ```
 0 * * * * /root/script/script.sh
 ```
+Hoặc 15 phút một lần:
+```
+*/15 * * * * /root/script/script.sh
+```
 
 Chúc các bạn thành công.
