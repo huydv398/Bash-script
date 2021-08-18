@@ -23,10 +23,12 @@ Install_C7(){
 # Install_C7
 
 config_wp(){
-    wget http://wordpress.org/latest.tar.gz -y
+    cd ~ && mkdir wp-down
+    cd wp-down
+    wget http://wordpress.org/latest.tar.gz
     tar xvfz latest.tar.gz
     rm -rf  /var/www/html/*
-    cp -Rvf /root/wordpress/* /var/www/html
+    cp -Rvf ~/wp-down/wordpress/* /var/www/html
     cd /var/www/html
     cp wp-config-sample.php wp-config.php
     sed -i -e "s/database_name_here/"$databasename"/g; s/username_here/"$username"/g; s/password_here/"$userpassword"/g; s/localhost/$host/g  " /var/www/html/wp-config.php
@@ -61,7 +63,12 @@ then
     then 
     host="localhost"
     fi
+    set -e
+    yum install -y wget > /dev/null 2>&1
     Install_C7
     config_wp
     install_mariadb  
+    firewall-cmd --zone=public --add-port=80/tcp --permanent > /dev/null 2>&1
+    firewall-cmd --reload > /dev/null 2>&1
+    systemctl restart httpd
 fi
