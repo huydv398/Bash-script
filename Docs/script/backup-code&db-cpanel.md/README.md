@@ -11,7 +11,12 @@
     * Phải cung cấp cấp mật khẩu database root cho script.
     * Backup theo các database riêng biệt và được nén sau khi backup
     * File nén được chuyển vào thư mục theo tên người dùng ở trên.
-
+## Yêu cầu 
+* Hệ điêu hành CentOS-7.
+* Cài đặt các phần mềm yêu cầu:
+```
+yum install -y curl zip
+```
 ## Thực hiện
 
 Thực hiện tải script:
@@ -21,6 +26,11 @@ mkdir script && cd script
 curl https://raw.githubusercontent.com/huydv398/Bash-script/master/Docs/script/backup-code%26db-cpanel.md/script.sh > script.sh && chmod +x script.sh
 ```
 
+
+Tiến hành sửa file `script.sh`:
+```
+vi script.sh
+```
 Thực hiện điền mật khẩu cho mysql root :
 ```
 # Khai báo mật khẩu của mysql_root
