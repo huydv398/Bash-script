@@ -49,3 +49,16 @@ Thực hiện backup
 ```
 ./script.sh
 ```
+
+Thực hiện crontab chạy 1 ngày 1 lần vào lúc 0 giờ hằng ngày
+
+Thực hiện lệnh 
+```
+crontab -e
+```
+
+Thêm dòng sau vào cuối cùng của file và lưu lại:
+```
+0 0 * * * /root/script/script.sh
+```
+* `/root/script/script.sh` là đường dẫn chính xác của file script.
