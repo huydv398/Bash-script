@@ -8,7 +8,8 @@ cat /etc/os-release* |grep 'centos' > /dev/null 2>&1 && OS='CentOS'
 upasswd=123@@123
 
 # Đường dẫn mà bạn muốn đặt các file backup
-src_folder=''
+#src_folder='source'
+src_folder='backup'
 if [ -e $src_folder]
 then 
     mkdir -p /backup2021-v1
