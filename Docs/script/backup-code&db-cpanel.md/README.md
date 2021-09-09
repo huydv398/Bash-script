@@ -62,3 +62,30 @@ Thêm dòng sau vào cuối cùng của file và lưu lại:
 0 0 * * * /root/script/script.sh
 ```
 * `/root/script/script.sh` là đường dẫn chính xác của file script.
+
+## Xóa các file khi quá lâu
+
+Ở trên crontab sử dụng vào 0 giờ 0 phút hằng ngày nhưng sau nhiều ngày có thể nhiều bản backup được lưu trữ làm khoảng trống dữ liệu bị thu hẹp, ở đây tôi sử dụng câu lệnh sau; mục đích chỉ giữ lại bản ghi backup của 7 ngày gần nhất.
+* `/backup2021-v1`: Thư mục mà bạn đặt các file backup.
+```
+find //backup2021-v1 "*zip" -atime +7 -exec rm {} \;
+```
+
+Sử dụng crontab vào 0h00 Thứ hai hàng tuần, thực hiện các bản ghi cũ chỉ để các bản ghi của 7 ngày gần nhất
+```
+0 0 * * find //backup2021-v1 "*zip" -atime +7 -exec rm {} \;
+```
+
+## Sử dụng rsync để chuyển các file backup đến máy chủ riêng biệt khác.
+**Rsync** - **Remote Sync** :Đồng bộ hóa dữ liệu từ xa.
+* Cài đặt rsync:
+    * yum install rsync -y
+
+Thực hiện lệnh:
+
+```
+rsync -zvh /backup2021-v1 root@IP:/home/backup
+```
+* **/backup2021-v1**: thư mục backup
+* **root@IP**: Thông tin SSH tối server.
+* **/home/backup**: Nơi lưu trữ trên server mới

@@ -5,7 +5,7 @@ cat /etc/os-release* |grep 'centos' > /dev/null 2>&1 && OS='CentOS'
 
 # Khai báo mật khẩu của mysql_root
 # upasswd='Password'
-upasswd=123@@123
+
 
 # Đường dẫn mà bạn muốn đặt các file backup
 #src_folder='source'

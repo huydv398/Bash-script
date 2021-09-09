@@ -136,6 +136,15 @@ touch -t $(date -d '10 HOUR AGO' +%Y%m%d%H%M.%S) start_date
 touch -t $(date -d '5 HOUR AGO' +%Y%m%d%H%M.%S) end_date
 timeout 10 find "$LOCAL_FOLDER" -newerat "start_date" ! -newerat "end_date" -print 
 ```
+ví dụ:
+```
+find . -name "*zip"  -amin +105 -exec rm {} \;
+```
+xóa các file có đuôi zip chỉ giữ lại các bản ghi zip trong trong 105 phút.
+
+* +105: chỉ hiển thỉ các bản ghi cách đây 105 phút
+* -105: Chỉ hiển thị bản ghi trong 105 quay lại thời điểm hiện tại
+
 ### 2.4 Tìm tệp theo kích thước
 * Tìm tệp lớn hơn 15MB:
 ```
