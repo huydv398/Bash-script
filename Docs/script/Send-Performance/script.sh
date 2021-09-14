@@ -3,7 +3,7 @@
 cat /etc/os-release* |grep 'ubuntu' > /dev/null 2>&1 && OS='Ubuntu'
 cat /etc/os-release* |grep 'centos' > /dev/null 2>&1 && OS='CentOS' 
 # ID Telegram
-USER_ID="USER_ID_edit"
+CHAT_ID="USER_ID_edit"
 #API Token
 TOKEN="TOKEN_edit"
 #URL send message API
@@ -48,7 +48,7 @@ DISK=$(df -h /)
 TEXT=$( echo -e "Thời gian: $DATE_EXEC\n\nInformation Host: $OS-$IP \n$INFO \n\nInfo RAM:\nMemory Total: $TOTAL MB \nMemory Used: $USED MB\nMemory Free: $FREE MB\n\nInfo CPU\nUser used: $CPU_USer %\nSystem used: $CPU_Kernel%\nKhông tải: $CPU_FREE%\n\nInfo Disk\n$DISK"  )
 
 # Gửi thông tin về tele và gamil
-curl -s -X POST "$ULR_Mess" -d chat_id=$USER_ID -d text="$TEXT"> /dev/null
+curl -s -X POST "$ULR_Mess" -d chat_id=$CHAT_ID -d text="$TEXT"> /dev/null
 
 {
     echo "Subject: Performance $OS-$IP: $DATE_EXEC"
