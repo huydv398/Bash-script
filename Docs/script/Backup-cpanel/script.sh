@@ -10,14 +10,14 @@ IP=$(hostname -I)
 
 # Khai báo mật khẩu của mysql_root
 # upasswd='Password'
-upasswd=''
+
 # Thông tin telegram
 chat_id_tele=''
 api_tele=''
 to_email=''
 
-MYSQL=/usr/bin/mysql
-MYSQLDUMP=/usr/bin/mysqldump
+
+
 # Đường dẫn mà bạn muốn đặt các file backup
 src_folder=''
 f_create_folder(){
@@ -25,18 +25,18 @@ f_create_folder(){
     then 
         mkdir -p /backup2021-v1
         
-        src_folder=backup2021-v1
+        src_folder='backup2021-v1'
     fi
 }
 mkdir -p /$src_folder/log
 # list database.
-echo 'show databases;' | mysql -u root > /tmp/listdb
+echo 'show databases;' | mysql -u root -p$upasswd > /tmp/listdb
 
 # Backup folder user chứa code
 f_backup_code(){
     # list database.
     Count_user=1
-    echo 'show databases;' | mysql -u root > /tmp/listdb
+    echo 'show databases;' | mysql -u root -p$upasswd> /tmp/listdb
     while read info;
     do
         Username=$(echo $info | awk -F: '{print $1}')
@@ -55,7 +55,7 @@ f_backup_code(){
                 # echo $Username $ID_user $Home_dir $src_Code $Bk_fol
                 if [ -e $Bk_fol ]
                 then
-                    echo -e "Sao lưu dữ liệu vào thư mục $Bk_fol."
+                    sleep 1
                 else
                     mkdir -p $Bk_fol
                 fi
@@ -98,16 +98,7 @@ f_backup_db(){
 
     done < /tmp/listdb
 }
-f_alert_main(){
-    subject_email="Backup DONE. $IP. $DATE_EXEC"
-    content=$( echo -e "Tổng số User được backup: $Total_user \nDung lượng backup (Byte): $size_file")
-    {
-        echo "Subject: $subject_email"
-        echo $content
-    } | ssmtp $to_email
-    curl -s -X POST "https://api.telegram.org/$api_tele/sendMessage" -d chat_id=$chat_id_tele -d text="Subject: $subject_email 
-    $content"
-}
+
 f_alert(){
     curl -s -X POST "https://api.telegram.org/$api_tele/sendMessage" -d chat_id=$chat_id_tele -d text="$1"
 }
@@ -124,10 +115,6 @@ f_check(){
     then 
         echo 'Biến $api_tele Trống. API_telegram dùng để gửi thông khi backup xong về telegram'
     fi
-    if [ -e $to_email ]
-    then 
-        echo 'Biến $to_email Trống. Biến là địa chỉ Email người dùng muốn gửi thông báo backup đến người dùng'
-    fi
     if [ -e $upasswd ]
     then 
         echo 'Biến $upasswd Trống'
@@ -143,13 +130,12 @@ main(){
     echo "Done check 1"
     f_backup_code
     echo "Done check 2"
-    if [ $? != 0 ]
-    then 
-        echo Error!!!
-    fi
+    content=$( echo -e "Tổng số User được backup: $Total_user \nDung lượng backup (Byte): $size_file")
+    f_alert "$content"
     end=`date +%s.%N`
     runtime=$( echo "$end - $start" | bc -l )
     runtime1=$(cut -c-4 <<< "$runtime")
     f_alert "Back up Done: $DATE_EXEC. Tổng thời gian thực hiện $runtime1  giây"
+    echo -e \n
 }
 main 2>&1 | tee /$src_folder/log/"log-$(date "+%Y%m%d%H%M")".txt
