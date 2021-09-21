@@ -16,8 +16,6 @@ chat_id_tele=''
 api_tele=''
 to_email=''
 
-
-
 # Đường dẫn mà bạn muốn đặt các file backup
 src_folder=''
 f_create_folder(){
@@ -29,6 +27,7 @@ f_create_folder(){
     fi
 }
 mkdir -p /$src_folder/log
+mkdir -p /$src_folder/test
 # list database.
 echo 'show databases;' | mysql -u root -p$upasswd > /tmp/listdb
 
@@ -36,7 +35,7 @@ echo 'show databases;' | mysql -u root -p$upasswd > /tmp/listdb
 f_backup_code(){
     # list database.
     Count_user=1
-    echo 'show databases;' | mysql -u root -p$upasswd> /tmp/listdb
+    echo 'show databases;' | mysql -u root -p$upasswd > /tmp/listdb
     while read info;
     do
         Username=$(echo $info | awk -F: '{print $1}')
@@ -89,7 +88,7 @@ f_backup_db(){
         if [[ $U1 == $Username ]]
         then
             echo -e "Backup Database: $dbname."
-            mysqldump -u root -p$upasswd $dbname >  /tmp/bk_db/file.sql > /dev/null 2>&1
+            mysqldump -u root -p$upasswd $dbname > /tmp/bk_db/file.sql
             zip -q /tmp/bk_db/file.sql.zip /tmp/bk_db/file.sql
             mv -i /tmp/bk_db/*.zip /$src_folder/$Username/"db-$dbname-$(date "+%H%M%d%m%Y")".sql.zip
             rm -rf /tmp/bk_db/* > /dev/null 2>&1
@@ -105,19 +104,23 @@ f_alert(){
 f_check(){
     if [ -e $upasswd ]
     then 
-        echo 'Biến $upasswd Trống. Đặt mật khật mysql root vào biến'
+        echo -e "\nBiến upasswd Trống. Đặt mật khật mysql root vào biến"
+        sleep 10
     fi
     if [ -e $chat_id_tele ]
     then 
-        echo 'Biến $chat_id_tele Trống. Dùng để gửi cảnh báo về telegram'
+        echo -e "\nBiến chat_id_tele Trống. Dùng để gửi cảnh báo về telegram"
+        sleep 10
     fi
     if [ -e $api_tele ]
     then 
-        echo 'Biến $api_tele Trống. API_telegram dùng để gửi thông khi backup xong về telegram'
+        echo -e "\nBiến api_tele Trống. API_telegram dùng để gửi thông khi backup xong về telegram"
+        sleep 10
     fi
-    if [ -e $upasswd ]
+    if [ -e $to_email ]
     then 
-        echo 'Biến $upasswd Trống'
+        echo -e "\nBiến to_email Trống. Biến là địa chỉ Email người dùng muốn gửi thông báo backup đến người dùng"
+        sleep 10
     fi
 }
 main(){
