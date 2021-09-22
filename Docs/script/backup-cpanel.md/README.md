@@ -13,7 +13,8 @@ Dưới đây là hướng dẫn sử dụng script dùng để backp code và d
     * Backup theo các database riêng biệt và được nén sau khi backup
     * File nén được chuyển vào thư mục theo tên người dùng ở trên.
 ## Yêu cầu 
-* Hệ điêu hành CentOS-7.
+* Hệ điều hành CentOS-7.
+* Sử dụng quyền quản trị để thực hiện
 * Cài đặt các phần mềm yêu cầu:
 ```
 yum install -y curl zip
@@ -23,7 +24,7 @@ yum install -y curl zip
 
 Thực hiện tải script:
 ```
-cd 
+cd ~
 mkdir script && cd script
 curl https://raw.githubusercontent.com/huydv398/Bash-script/master/Docs/script/backup-cpanel.md/script.sh > script.sh && chmod +x script.sh
 ```
