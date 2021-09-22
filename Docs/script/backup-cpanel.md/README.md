@@ -1,6 +1,7 @@
-# Script backup cho code và cơ sở dữ liệu cửa panel cPanel.
+# Script backup cho code và cơ sở dữ liệu của cPanel.
 
 # Giới thiệu
+Dưới đây là hướng dẫn sử dụng script dùng để backp code và database cho cpanel
 * Khi backup có dạng thư mục như sau: Thư mục được đặt theo tên của Username. Trong thư mục được đặt file nén code và file nén database. 
 * Backup thư mục lưu trữ.
     * Thư mục lưu trữ của cPanel là thư mục **~/public_html**
@@ -17,14 +18,16 @@
 ```
 yum install -y curl zip
 ```
+* Đã được cài đặt ssmtp (Sử dụng ssmtp để gửi thông báo về mail)
 ## Thực hiện
 
 Thực hiện tải script:
 ```
 cd 
 mkdir script && cd script
-curl https://raw.githubusercontent.com/huydv398/Bash-script/master/Docs/script/backup-code%26db-cpanel.md/script.sh > script.sh && chmod +x script.sh
+curl https://raw.githubusercontent.com/huydv398/Bash-script/master/Docs/script/backup-cpanel.md/script.sh > script.sh && chmod +x script.sh
 ```
+
 
 
 Tiến hành sửa file `script.sh`:
@@ -38,7 +41,12 @@ Thực hiện điền mật khẩu cho mysql root :
 upasswd=Passdb@@123
 
 ```
-
+Thực hiện thêm các thông tin cho user nhận thông báo(Điền các thông tin vào trong dấu nháy đơn):
+```
+chat_id_tele=''
+api_tele=''
+to_email=''
+```
 Thực hiện chọn nơi lưu trữ cho backup, ở đâu tôi chọn thư mục `/backup` làm nơi lưu trữ backup:
 ```
 # Đường dẫn mà bạn muốn đặt các file backup
@@ -89,3 +97,5 @@ rsync -zvh /backup2021-v1 root@IP:/home/backup
 * **/backup2021-v1**: thư mục backup
 * **root@IP**: Thông tin SSH tối server.
 * **/home/backup**: Nơi lưu trữ trên server mới
+
+Cám ơn các bạn đã đọc. Script vẫn đang trong quá trình test và hoàn thiện mong được sự đóng góp ý kiến từ bạn đọc.
